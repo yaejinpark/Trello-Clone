@@ -9,8 +9,19 @@ exports.index = function (req,res){
 	var user = User;
 	user.find({}, function (error, data){
 		if (data) {
-			res.json(data)
+			res.json(data);
 		} else if (error) {
+			console.error(error.stack);
+		}
+	})
+}
+
+//Show existing user (1)
+exports.show = function(req, res) {
+	User.find({ _id: req.params.id}, function (error, user){
+		if (user) {
+			res.json(user);
+		} else if(error) {
 			console.error(error.stack);
 		}
 	})
@@ -34,3 +45,27 @@ exports.create = function (req, res){
 		}
 	})
 }
+
+// //Update User Information (Only password and e-mail)
+// exports.edit = function (req, res){
+// 	var query = { _id: req.params.user_id};
+// 	User.update(query, {password: req.body.password, email: req.body.email}, function (error, data){
+// 		User.find({}, function (error, user){
+// 			res.json(user);
+// 		})
+// 	})
+// }
+
+// //Destroy Existing User
+// exports.destroy = function (req, res){
+// 	var user = new User({ _id: req.params.user_id});
+// 	user.remove(function (error,data){
+// 		if(data){
+// 			User.find({}, function (error, users){
+// 				res.json(users);
+// 			})
+// 		} else if (error) {
+// 			console.error(error.stack);
+// 		}
+// 	})
+// }

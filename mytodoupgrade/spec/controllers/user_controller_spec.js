@@ -1,61 +1,65 @@
 var request = require('supertest'),
     app = require('../../app').app;
 
-var Owner = require ('../../app/models/owner');
+var User = require ('../../app/models/user');
 
-describe ('OwnersController', function() {
-  describe('with no data', function() {
-    it('should return an empty list', function(done) {
-      request(app).get('/owners')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .end(function(err, res){
-        if (err) {
-          done.fail(err);
-        } else {
-          expect(res.body).toEqual([]);
-          done();
-        }
-      });
-    });
-  });
+describe ('UserController', function() {
+  // describe('with no data', function() {
+  //   it('should return an empty user', function (done) {
+  //     request(app).get('/api')
+  //     .expect('Content-Type', /json/)
+  //     .expect(200)
+  //     .end(function(err, res){
+  //       if (err) {
+  //         done.fail(err);
+  //       } else {
+  //         expect(res.body).toBeTruthy();
+  //         done();
+  //       }
+  //     });
+  //   });
+  // });
 
   describe('with data', function() {
-    var owner;
+    var user;
 
     beforeEach(function(done) {
-      Owner.create({ name: 'test owner' }, function(err, newOwner) {
+      User.create({ 
+        username: 'testuser', 
+        password: 'testcreate', 
+        email: 'test@test.com' 
+      }, function (err, newUser) {
         if (err) {
           console.log(err);
           done.fail(err);
         } else {
-          console.log(newOwner);
-          owner = newOwner;
+          console.log(newUser);
+          user = newUser;
           done();
         }
       });
     });
 
-    it('should return a list of 1 owner', function(done) {
-      request(app).get('/owners')
+    it('should return an existing user', function (done) {
+      request(app).get('/api/user/'+user._id)
       .expect('Content-Type', /json/)
       //Making sure that Content-Type is json, not some other element (like html header)
       //Basically checking that the header type contains the word json
       .expect(200)
-      .end(function(err, res){
+      .end(function (err, res){
         if (err) {
           done.fail(err);
         } else {
             expect(res.body.length).toEqual(1);
-            returnedOwner = res.body[0];
-            expect(returnedOwner.name).toEqual(owner.name);
+            returnedUser = res.body[0];
+            expect(returnedUser.username).toBe('testuser');
             done();
         }
       });
     });
 
-    afterEach(function(done) {
-      owner.remove(function(err, removedOwner) {
+    afterEach(function (done) {
+      user.remove(function (err, removedUser) {
         if (err) {
           done.fail(err);
         } else {
@@ -63,5 +67,6 @@ describe ('OwnersController', function() {
         }
       });
     });
+
   });
 });
