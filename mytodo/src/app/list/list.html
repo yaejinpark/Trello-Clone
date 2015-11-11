@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>My Lists of Todo Lists</h2>
+    <!-- Lists input -->
+        <form role="form" ng-submit="createList()">
+            <div class="row">
+                <div class="input-group">
+                    <input type="text" ng-model="formData.name" placeholder="Start a New List" class="form-control">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="Add">
+                    </span>
+                </div>
+            </div>
+        </form>
+
+    <!-- buttons and forms-->
+    <div ui-sortable ng-model="lists" id="list-todo">
+        <div class="input-group" ng-repeat="list in lists track by $index">
+            <input type="text" ng-model="list.name" class="form-control">
+            <span class="input-group-btn">
+                <a class='btn btn-primary' href="#/todos?listId={{list._id}}">Show List</a>
+                <button class="btn btn-default" ng-click="updateList(list._id, list.name)" aria-label="Update">Edit</button>
+                <button class="btn btn-danger" ng-click="deleteList(list._id)" aria-label="Remove">X</button>
+            </span>
+        </div>
+        <a class='btn btn-primary' href="#/boards"> Go Back to Boards</a>
+    </div> 
+
+</div>

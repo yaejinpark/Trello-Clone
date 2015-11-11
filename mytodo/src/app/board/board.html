@@ -1,0 +1,27 @@
+<div class="container">
+    <h2>My Boards of Lists</h2>
+    <!-- Boards input -->
+        <form role="form" ng-submit="createBoard()">
+            <div class="row">
+                <div class="input-group">
+                    <input type="text" ng-model="formData.name" placeholder="Start a New Board" class="form-control">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="Add">
+                    </span>
+                </div>
+            </div>
+        </form>
+
+    <!-- buttons and forms-->
+    <div ui-sortable ng-model="boards" id="boards-lists">
+        <div class="input-group" ng-repeat="board in boards track by $index">
+            <input type="text" ng-model="board.name" class="form-control">
+            <span class="input-group-btn">
+                <a class='btn btn-primary' href="#/lists?boardId={{board._id}}">Show Board</a>
+                <button class="btn btn-default" ng-click="updateBoard(board._id, board.name)" aria-label="Update">Edit</button>
+                <button class="btn btn-danger" ng-click="deleteBoard(board._id)" aria-label="Remove">X</button>å
+            </span>
+        </div>
+    </div> 
+
+</div>

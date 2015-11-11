@@ -1,0 +1,21 @@
+<div class="container">
+    <h2>Sign Up</h2>
+    <!-- Users input -->
+        <form role="form" ng-submit="createUser()">
+            <div class="row">
+                <div class="input-group">
+                    <input type="text" ng-model="formData.username" placeholder="Username" class="form-control">
+                    <input type="password" ng-model="formData.password" placeholder="Password" class="form-control">
+                    <input type="email" ng-model="formData.email" placeholder="E-mail" class="form-control">
+                </div>
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-primary" value="Create Account">
+			        <a class='btn btn-primary' href="#/">Sign In</a>
+                </span>
+            </div>
+        </form>
+
+    <!-- buttons -->
+    <div ui-sortable ng-model="users" id="user-signin">
+    </div> 
+</div>
