@@ -10,9 +10,9 @@ describe ('UserController', function() {
 
         beforeEach(function(done) {
             User.create({ 
-                username: 'testuser10', 
+                username: 'testuser', 
                 password: 'testcreate', 
-                email: 'test10@test.com' 
+                email: 'test@test.com' 
             }, function (err, newUser) {
                 if (err) {
                     console.log(err);
@@ -47,7 +47,7 @@ describe ('UserController', function() {
                 } else {
                     expect(res.body.length).toEqual(1);
                     returnedUser = res.body[0];
-                    expect(returnedUser.username).toBe('testuser10');
+                    expect(returnedUser.username).toBe('testuser');
                     done();
                 }
             });
@@ -84,31 +84,33 @@ describe ('UserController', function() {
                 if (err) {
                   done.fail(err);
                 } else {
-                    var returnedUser = res.body[res.body.length-1];
-                    User.findOne({ username:'testCreate'})
+                    User.findOne({ _id: user._id})
                     .remove(function (error){
-                        expect(returnedUser).toBeUndefined()
-                        done();
+                        User.findOne({ _id: user._id}, function (err,user){
+                            if (err) {
+                                done.fail(err);
+                            } else {
+                                expect(user).toBeNull()
+                                done();      
+                            }
+                        })
                     })
                 }
             });
         });
 
-        //Test for updating user
+        //Test for updating a user
         it('should update an existing user', function (done){
             request(app).post('/api/users/edit/'+user._id)
-            .field(
-                'password','updatedPw'
-                // email:'update@test.com'
-            )
-            // .expect('Content-Type', /json/)
+            .send({
+                password:'updatedPw',
+                email:'update@test.com'
+            })
             .end(function (err,res){
                 if (err) {
                   done.fail(err);
                 } else {
-                    console.log(res.body);
                     returnedUser = res.body[res.body.length-1];
-                    console.log(returnedUser);
                     expect(returnedUser.password).toBe('updatedPw');
                     User.findOne({ email:'update@test.com'})
                     done();

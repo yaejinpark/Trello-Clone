@@ -36,10 +36,10 @@ app.get('/api/user/:id', UserController.show)
 app.post('/api/users/create', UserController.create)
 
 //update existing user
-app.post('api/users/edit/:user_id', UserController.edit)
+app.post('/api/users/edit/:id', UserController.edit)
 
 //delete existing user
-app.post('api/users/delete/:user_id', UserController.destroy)
+app.post('/api/users/delete/:id', UserController.destroy)
 
 //--------------------routes for board--------------------
 //index
