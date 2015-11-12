@@ -16,7 +16,7 @@ exports.index = function (req,res){
 	})
 }
 
-//Show existing user (1)
+//Show existing user (one user only)
 exports.show = function(req, res) {
 	User.find({ _id: req.params.id}, function (error, user){
 		if (user) {
@@ -34,7 +34,6 @@ exports.create = function (req, res){
 		email: req.body.email,
 		password: req.body.password
 	});
-
 	user.save(function (error, data){
 		if (data){
 			User.find({}, function (error, users){
