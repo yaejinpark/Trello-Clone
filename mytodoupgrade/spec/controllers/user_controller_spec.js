@@ -92,6 +92,23 @@ describe ('UserController', function() {
       });
     });
 
+    //Test for deleting a new user
+    it('should delete an existing user', function (done) {
+      request(app).post('/api/users/delete'+user._id)
+      .end(function (err, res){
+        if (err) {
+          done.fail(err);
+        } else {
+            var returnedUser = res.body[res.body.length-1];
+            User.findOne({ username:'yaejin'})
+            .remove(function (error){
+              expect(returnedUser).toBeUndefined()
+              done();
+            })
+        }
+      });
+    });
+
 
   });
 });
