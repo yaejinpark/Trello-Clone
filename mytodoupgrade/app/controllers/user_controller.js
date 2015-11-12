@@ -16,7 +16,7 @@ exports.index = function (req,res){
 	})
 }
 
-//Show existing user (1)
+//Show existing user (one user only)
 exports.show = function(req, res) {
 	User.find({ _id: req.params.id}, function (error, user){
 		if (user) {
@@ -34,7 +34,6 @@ exports.create = function (req, res){
 		email: req.body.email,
 		password: req.body.password
 	});
-
 	user.save(function (error, data){
 		if (data){
 			User.find({}, function (error, users){
@@ -46,26 +45,29 @@ exports.create = function (req, res){
 	})
 }
 
-// //Update User Information (Only password and e-mail)
-// exports.edit = function (req, res){
-// 	var query = { _id: req.params.user_id};
-// 	User.update(query, {password: req.body.password, email: req.body.email}, function (error, data){
-// 		User.find({}, function (error, user){
-// 			res.json(user);
-// 		})
-// 	})
-// }
+//Update User Information (Only password and e-mail)
+exports.edit = function (req, res){
+	var query = { _id: req.params.id};
+	User.update(query, {
+		password: req.body.password, 
+		email: req.body.email}, 
+		function (error, data){
+			User.find({}, function (error, user){
+				res.json(user);
+			})
+		})
+}
 
-// //Destroy Existing User
-// exports.destroy = function (req, res){
-// 	var user = new User({ _id: req.params.user_id});
-// 	user.remove(function (error,data){
-// 		if(data){
-// 			User.find({}, function (error, users){
-// 				res.json(users);
-// 			})
-// 		} else if (error) {
-// 			console.error(error.stack);
-// 		}
-// 	})
-// }
+//Destroy Existing User
+exports.destroy = function (req, res){
+	var user = new User({ _id: req.params.id});
+	user.remove(function (error,data){
+		if(data){
+			User.find({}, function (error, users){
+				res.json(users);
+			})
+		} else if (error) {
+			console.error(error.stack);
+		}
+	})
+}

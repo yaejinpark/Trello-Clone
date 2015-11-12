@@ -29,17 +29,17 @@ var TodoController = require('./app/controllers/todo_controller.js'),
 //index
 app.get('/api', UserController.index)
 
-//create new user
-app.post('/api/users/create', UserController.create)
-
 //show existing user
 app.get('/api/user/:id', UserController.show)
 
+//create new user
+app.post('/api/users/create', UserController.create)
+
 //update existing user
-// app.post('api/users/edit/:user_id')
+app.post('/api/users/edit/:id', UserController.edit)
 
 //delete existing user
-// app.post('api/users/delete/:user_id')
+app.post('/api/users/delete/:id', UserController.destroy)
 
 //--------------------routes for board--------------------
 //index
