@@ -45,26 +45,27 @@ exports.create = function (req, res){
 	})
 }
 
-// //Update User Information (Only password and e-mail)
-// exports.edit = function (req, res){
-// 	var query = { _id: req.params.user_id};
-// 	User.update(query, {password: req.body.password, email: req.body.email}, function (error, data){
-// 		User.find({}, function (error, user){
-// 			res.json(user);
-// 		})
-// 	})
-// }
+//Update User Information (Only password and e-mail)
+exports.edit = function (req, res){
+	var query = { _id: req.params.user_id};
+	// console.log(req.body);
+	User.update(query, {password: req.body.password, email: req.body.email}, function (error, data){
+		User.find({}, function (error, user){
+			res.json(user);
+		})
+	})
+}
 
-// //Destroy Existing User
-// exports.destroy = function (req, res){
-// 	var user = new User({ _id: req.params.user_id});
-// 	user.remove(function (error,data){
-// 		if(data){
-// 			User.find({}, function (error, users){
-// 				res.json(users);
-// 			})
-// 		} else if (error) {
-// 			console.error(error.stack);
-// 		}
-// 	})
-// }
+//Destroy Existing User
+exports.destroy = function (req, res){
+	var user = new User({ _id: req.params.user_id});
+	user.remove(function (error,data){
+		if(data){
+			User.find({}, function (error, users){
+				res.json(users);
+			})
+		} else if (error) {
+			console.error(error.stack);
+		}
+	})
+}
