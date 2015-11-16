@@ -24,9 +24,10 @@ exports.create = function(req,res){
 	var listId = req.body._listid;
 	todo.save(function (error,data) {
 		if (data) {
-			Todo.find({ '_listid': listId})
-				.exec(function (error,todos){
-				res.json(todos);
+			Todo.findOne({ '_id': data._id})
+			.exec(function (error,todo){
+				// console.log(todo);
+				res.json(todo);
 			})
 		} else if (error) {
 			console.error(error.stack);
@@ -36,7 +37,7 @@ exports.create = function(req,res){
 
 //Update Existing Todo Item
 exports.edit = function (req,res){
-	var listId = req.body._listid;
+	var listId = req.params._listid;
 	var query = { _id: req.params.todo_id};
 	Todo.update(query, {name: req.body.name}, function (error,data){
 		Todo.find({ _id: req.params.todo_id}, function (error, todo) {
