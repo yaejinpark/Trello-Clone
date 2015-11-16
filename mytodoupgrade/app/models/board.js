@@ -6,6 +6,7 @@ var List = require('./list');
 
 //create a schema for board
 var boardSchema = new Schema({
+	_userid: { type: Schema.Types.ObjectId, ref: 'User'},
 	name: { type: String, required: true, unique: true},
 	lists: [{ type: Schema.Types.ObjectId, ref:'List'}],
 	created_at: Date,

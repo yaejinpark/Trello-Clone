@@ -31,13 +31,10 @@ exports.show = function (req, res){
 //Create New List
 exports.create = function(req,res){
 	var boardId = req.body._boardid;
-	console.log('This is boardId: '+boardId);
 	var list = new List ({name: req.body.name, _boardid: req.body._boardid});
 	list.save(function (error,data) {
 		if (data) {
-			List.find({ '_boardid': boardId}, function (error,lists){
-				res.json(lists);
-			})
+			res.json(data);
 		} else if (error) {
 			console.error(error.stack);
 		}
@@ -59,10 +56,8 @@ exports.destroy = function (req,res){
 	var list = new List({_id: req.params.list_id});
 	list.remove(function (error,data) {
 		if (data) {
-			List.find({}, function (error, lists){
-				res.json(lists);
-			})
-		} else if( error) {
+			res.json(data);
+		} else if(error) {
 			console.error(error.stack);
 		}
 	})

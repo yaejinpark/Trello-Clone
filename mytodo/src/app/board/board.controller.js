@@ -3,63 +3,65 @@
 
 	angular
 	.module('mytodo')
-	.controller('BoardController', function ($scope, $http) {
-		$scope.boards = [];
-		$scope.formData = {};
-		$http.get('api/boards')
-			 .success(function (data) {
-				 $scope.boards = data;
-			 })
-			 .error(function (data){
-			     console.log('Error: ' +  data);
-			 });
+	.controller('BoardController', ['$routeParams','BoardService', function ($routeParams, BoardService) {
+		var vm = this;
+	    vm.boards = [];
+	    vm.formData = {};
+	    var userId = $routeParams.userId;
+	    vm.formData._userid = userId;
+
+	    //List of Boards (with their userId)
+	    BoardService.getBoards(userId)
+	    .then(function (data) {
+	    	vm.boards = data;
+	    })
+	    .catch(function (err) {
+            console.log('Error: ' + err);
+        })
 
 		//Create a new Board
-		$scope.createBoard = function(){
-		    $http.post('api/boards/create', $scope.formData)
-		         .success(function (data){
-		            $scope.formData = {};
-		            $scope.boards = data;
-		         })
-		         .error(function (data){
-		             console.log('Error: ' +  data);
-		         });
+		vm.createBoard = function(){
+	    	BoardService.createBoard(vm.formData)
+	        .then(function (data) {
+	            vm.boards.push(data);
+	        })
+	        .catch(function (err) {
+	            console.log('Error: ' + err);
+	        })
 		};
 
-		//Show a list's content
-		$scope.showBoard = function(id){
-			$http.get('api/board' + id)
-				 .success(function (data){
-				 	$scope.boards = data
-				 })
-				 .error(function (data){
-				     console.log('Error: ' +  data);
-				 });
+		//Show a board's content
+		vm.showBoard = function(id){
+	    	BoardService.showBoard(id)
+		    .then(function (data) {
+		    	vm.boards = data;
+		    })
+		    .catch(function (err) {
+	            console.log('Error: ' + err);
+	        })
+	    }
+
+		//Delete an existing board    
+		vm.deleteBoard = function(id){
+		    BoardService.deleteBoard(id)
+	    	.then(function (data) {
+	    		var index = vm.boards.indexOf(data);
+	    		vm.boards.splice(index, 1);
+	    	})
+	    	.catch(function (err) {
+                console.log('Error: ' + err);
+            })
 		}
 
-		//Update existing list
-		$scope.updateBoard = function(id, updatedName){
-         	console.log(updatedName);
-         	console.log(id);
-		    $http.post('api/boards/edit/' + id, {name: updatedName})
-		         .success(function (data){
-		            $scope.boards = data;
-		            console.log($scope.boards);
-		         })
-		         .error(function (data){
-		             console.log('Error: ' +  data);
-		         });
-		}
-
-		//Delete a todo item    
-		$scope.deleteBoard = function(id){
-		    $http.post('api/boards/delete/' + id)
-		         .success(function (data){
-		            $scope.boards = data;
-		         })
-		         .error(function (data){
-		             console.log('Error: ' +  data);
-		         });
-		}
-	})
+	    //Update an existing board
+	    vm.updateBoard = function(id, updatedName){
+	        BoardService.updateBoard(id, updatedName)
+	        .then(function (data) {
+	            console.log('Board name updated to: ', updatedName);
+	        })
+            .catch(function (err) {
+                console.log('Error: ' + err);
+            })
+	    }
+	}]);
 })();

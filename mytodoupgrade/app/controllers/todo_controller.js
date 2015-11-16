@@ -48,13 +48,10 @@ exports.edit = function (req,res){
 
 //Destroy Existing Todo Item
 exports.destroy = function (req,res){
-	var listId = req.body._listid;
 	var todo = new Todo({_id: req.params.todo_id});
 	todo.remove(function (error,data) {
 		if (data) {
-			Todo.find({ _id: req.params.todo_id}, function (error, todos){
-				res.json(todos);
-			})
+			res.json(data);
 		} else if( error) {
 			console.error(error.stack);
 		}

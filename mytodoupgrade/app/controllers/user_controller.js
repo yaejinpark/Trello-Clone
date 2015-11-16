@@ -32,13 +32,11 @@ exports.create = function (req, res){
 	var user = new User ({
 		username: req.body.username,
 		email: req.body.email,
-		password: req.body.password
+		password: req.body.password,
 	});
 	user.save(function (error, data){
 		if (data){
-			User.find({}, function (error, users){
-				res.json(users);
-			})
+			res.json(data);
 		} else if (error) {
 			console.error(error.stack);
 		}
@@ -63,9 +61,7 @@ exports.destroy = function (req, res){
 	var user = new User({ _id: req.params.id});
 	user.remove(function (error,data){
 		if(data){
-			User.find({}, function (error, users){
-				res.json(users);
-			})
+			res.json(data);
 		} else if (error) {
 			console.error(error.stack);
 		}

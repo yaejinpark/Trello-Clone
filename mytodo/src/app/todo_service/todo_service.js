@@ -3,7 +3,7 @@
 
     angular
     .module('mytodo')
-    .factory('TodoService',['$http','$q', function ($http, $q) {
+    .factory('TodoService', ['$http','$q', function ($http, $q) {
         var service = {};
 
         service.getTodos = function(listId) {
@@ -19,6 +19,7 @@
                 return deferred.promise;     
         }
       
+        //Create a new todo item
         service.createTodo = function(formData) {
             var deferred = $q.defer();
             $http.post('api/todos/create/', formData)
@@ -33,6 +34,7 @@
                  return deferred.promise;     
         }
 
+        //Delete an existing todo item
         service.deleteTodo = function (id) {
             var deferred = $q.defer();
             $http.post('api/todos/delete/' + id)
@@ -46,6 +48,7 @@
                  return deferred.promise;
         }
 
+        //Update an existing todo item
         service.updateTodo = function(id, updatedName){
             var deferred = $q.defer();
             $http.post('api/todos/edit/' + id, {name: updatedName})

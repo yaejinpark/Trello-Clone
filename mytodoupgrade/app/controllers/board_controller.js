@@ -6,8 +6,9 @@ var Board = require('../models/board')
 
 //Index
 exports.index = function (req,res){
+	var userId = req.param('userId')
 	var board = Board;
-	board.find({}, function (error, data){
+	board.find({_userid: userId}, function (error, data){
 		if (data) {
 			res.json(data);
 		} else if (error) {
@@ -29,12 +30,10 @@ exports.show = function (req, res){
 
 //Create New Board
 exports.create = function(req,res){
-	var board = new Board ({name: req.body.name});
+	var board = new Board ({name: req.body.name, _userid: req.body._userid});
 	board.save(function (error,data) {
 		if (data) {
-			Board.find({}, function (error,boards){
-				res.json(boards);
-			})
+			res.json(data);
 		} else if (error) {
 			console.error(error.stack);
 		}
@@ -56,10 +55,8 @@ exports.destroy = function (req,res){
 	var board = new Board({_id: req.params.board_id});
 	board.remove(function (error,data) {
 		if (data) {
-			Board.find({}, function (error, boards){
-				res.json(boards);
-			})
-		} else if( error) {
+			res.json(data);
+		} else if(error) {
 			console.error(error.stack);
 		}
 	})

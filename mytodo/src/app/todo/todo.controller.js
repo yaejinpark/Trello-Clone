@@ -24,7 +24,8 @@
             TodoService.createTodo(vm.formData)
             .then(function (data) {
                 vm.todos.push(data);
-            }).catch(function (err) {
+            })
+            .catch(function (err) {
                 console.log('Error: ' + err);
             })
         }
@@ -33,8 +34,11 @@
             TodoService.deleteTodo(id)
             .then(function (data) {
                 var index = vm.todos.indexOf(data);
-                vm.todos = vm.todos.splice(index, 1);
-            }).catch(function (err) {
+                vm.todos.splice(index, 1);
+                // vm.todos = vm.todos.splice(index, 1);
+                // vm.todos on the left overwrites, requiring you to refresh to see the change
+            })
+            .catch(function (err) {
                 console.log('Error: ' + err);
             })
         }
@@ -43,8 +47,9 @@
         vm.updateTodo = function(id, updatedName){
             TodoService.updateTodo(id, updatedName)
             .then(function (data) {
-                console.log('Updated to: ', updatedName);
-            }).catch(function (err) {
+                console.log('Item updated to: ', updatedName);
+            })
+            .catch(function (err) {
                 console.log('Error: ' + err);
             })
         }
