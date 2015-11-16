@@ -57,7 +57,7 @@ exports.destroy = function (req,res){
 	list.remove(function (error,data) {
 		if (data) {
 			res.json(data);
-		} else if( error) {
+		} else if(error) {
 			console.error(error.stack);
 		}
 	})

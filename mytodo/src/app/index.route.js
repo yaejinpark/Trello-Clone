@@ -30,7 +30,7 @@
     .when('/boards', {
       templateUrl: 'app/board/board.html',
       controller: 'BoardController',
-      controllerAs: 'board'
+      controllerAs: 'boardCtrl'
     })
     .otherwise({
       redirectTo: '/'

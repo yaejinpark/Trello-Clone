@@ -45,7 +45,6 @@
 	    vm.deleteList = function(id){
 	    	ListService.deleteList(id)
 	    	.then(function (data) {
-	    		console.log(data);
 	    		var index = vm.lists.indexOf(data);
 	    		vm.lists.splice(index, 1);
 	    	})
