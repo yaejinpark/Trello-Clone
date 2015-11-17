@@ -20,7 +20,7 @@
     .when('/users', {
       templateUrl: 'app/user/signup.html',
       controller: 'UserController',
-      controllerAs: 'user'
+      controllerAs: 'userCtrl'
     })
     .otherwise({
       redirectTo: '/'

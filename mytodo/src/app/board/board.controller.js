@@ -39,7 +39,7 @@
 		    .catch(function (err) {
 	            console.log('Error: ' + err);
 	        })
-	    }
+	    };
 
 		//Delete an existing board    
 		vm.deleteBoard = function(id){
@@ -55,7 +55,7 @@
 	    	.catch(function (err) {
                 console.log('Error: ' + err);
             })
-		}
+		};
 
 	    //Update an existing board
 	    vm.updateBoard = function(id, updatedName){
@@ -66,6 +66,6 @@
             .catch(function (err) {
                 console.log('Error: ' + err);
             })
-	    }
-	}]);
+	    };
+	}])
 })();

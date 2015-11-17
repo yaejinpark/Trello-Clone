@@ -59,7 +59,7 @@
 		            console.log('Error: ' +  data);
 		         });
 		         return deferred.promise;
-		}
+		};
 
 		//Update existing list
 		service.updateBoard = function(id, updatedName){
@@ -73,7 +73,7 @@
 		            console.log('Error: ' +  data);
 		         });
 		         return deferred.promise;
-		}
+		};
 		return service;
 	}]);
 })();
