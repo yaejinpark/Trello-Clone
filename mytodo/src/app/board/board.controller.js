@@ -45,8 +45,12 @@
 		vm.deleteBoard = function(id){
 		    BoardService.deleteBoard(id)
 	    	.then(function (data) {
-	    		var index = vm.boards.indexOf(data);
-	    		vm.boards.splice(index, 1);
+	    		for (var i = 0; i < vm.boards.length; i++){
+	    			if (vm.boards[i]._id == data._id){
+			    		vm.boards.splice(i, 1);
+			    		break;
+	    			}
+	    		}
 	    	})
 	    	.catch(function (err) {
                 console.log('Error: ' + err);

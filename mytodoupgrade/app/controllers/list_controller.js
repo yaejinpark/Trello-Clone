@@ -8,6 +8,15 @@ var List = require('../models/list');
 exports.index = function (req,res){
 	var boardId = req.param('boardId')
 	var list = List;
+	// list.find({_boardid: boardId})
+	// .populate('todos')
+	// .exec(function (error, data) {
+	// 	if (data) {
+	// 		res.json(data);
+	// 	} else if (error) {
+	// 		console.error(error.stack);
+	// 	}
+	// })
 	list.find({_boardid: boardId}, function (error, data){
 		if (data) {
 			res.json(data);
@@ -38,6 +47,7 @@ exports.create = function(req,res){
 		} else if (error) {
 			console.error(error.stack);
 		}
+	.populate('todos')
 	})
 }
 
@@ -56,7 +66,7 @@ exports.destroy = function (req,res){
 	var list = new List({_id: req.params.list_id});
 	list.remove(function (error,data) {
 		if (data) {
-			res.json(data);
+			res.json(data.populate('todos'));
 		} else if(error) {
 			console.error(error.stack);
 		}
