@@ -33,26 +33,26 @@ describe ('TodoController', function() {
         });
 
         //Test for creating a new todo item
-        it('should create a new todo', function (done) {
-            request(app).post('/api/todos/:'+list_id)
-            .send({
-                name: 'testTodoCreate'
-            })
-            .expect('Content-Type', /json/)
-            .expect(200)
-            .end(function (err, res){
-                if (err) {
-                  done.fail(err);
-                } else {
-                    returnedTodo = res.body[res.body.length-1];
-                    expect(returnedTodo.name).toBe('testTodoCreate');
-                    Todo.findOne({ name:'testTodoCreate'})
-                    .remove(function (error){
-                        done();
-                    })
-                }
-            });
-        });
+        // it('should create a new todo', function (done) {
+        //     request(app).post('/api/todos/:'+list_id)
+        //     .send({
+        //         name: 'testTodoCreate'
+        //     })
+        //     .expect('Content-Type', /json/)
+        //     .expect(200)
+        //     .end(function (err, res){
+        //         if (err) {
+        //           done.fail(err);
+        //         } else {
+        //             returnedTodo = res.body[res.body.length-1];
+        //             expect(returnedTodo.name).toBe('testTodoCreate');
+        //             Todo.findOne({ name:'testTodoCreate'})
+        //             .remove(function (error){
+        //                 done();
+        //             })
+        //         }
+        //     });
+        // });
 
         //Test for deleting a new user
         // it('should delete an existing user', function (done) {
