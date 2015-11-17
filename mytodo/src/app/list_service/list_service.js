@@ -20,9 +20,9 @@
 	    };
 	        
 	    //Create a new list   
-	    service.createList = function(formData){
+	    service.createList = function(boardId, formData){
 	    	var deferred = $q.defer();
-	        $http.post('api/lists/create', formData)
+	        $http.post('api/lists/create/' + boardId, formData)
 	             .success(function (data){
 	                formData = {};
 	                deferred.resolve(data);

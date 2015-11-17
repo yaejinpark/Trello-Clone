@@ -49,7 +49,7 @@ app.get('/api/boards', BoardController.index)
 app.get('/api/board/:board_id', BoardController.show)
 
 //create new board
-app.post('/api/boards/create', BoardController.create)
+app.post('/api/boards/create/:user_id', BoardController.create)
 
 //update existing board
 app.post('/api/boards/edit/:board_id', BoardController.edit)
@@ -65,7 +65,7 @@ app.get('/api/lists', ListController.index)
 app.get('/api/list/:list_id', ListController.show)
 
 //create new list
-app.post('/api/lists/create', ListController.create)
+app.post('/api/lists/create/:board_id/', ListController.create)
 
 //update existing list
 app.post('/api/lists/edit/:list_id', ListController.edit)

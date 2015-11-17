@@ -21,7 +21,7 @@
 
 		//Create a new Board
 		vm.createBoard = function(){
-	    	BoardService.createBoard(vm.formData)
+	    	BoardService.createBoard(vm.formData._userid, vm.formData)
 	        .then(function (data) {
 	            vm.boards.push(data);
 	        })

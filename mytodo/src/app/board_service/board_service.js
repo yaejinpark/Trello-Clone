@@ -20,9 +20,9 @@
 	    }
 
 		//Create a new Board
-		service.createBoard = function(formData){
+		service.createBoard = function(userId, formData){
 			var deferred = $q.defer();
-		    $http.post('api/boards/create', formData)
+		    $http.post('api/boards/create/' + userId, formData)
 		         .success(function (data){
 		            formData = {};
 		            deferred.resolve(data);

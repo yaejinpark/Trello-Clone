@@ -57,7 +57,7 @@ describe ('UserController', function() {
         it('should create a new user', function (done) {
             request(app).post('/api/users/create')
             .send({
-                username: 'testCreate12',
+                username: 'testCreate13',
                 password: 'createPw',
                 email: 'create12@test.com'
             })
@@ -68,8 +68,8 @@ describe ('UserController', function() {
                   done.fail(err);
                 } else {
                     returnedUser = res.body[res.body.length-1];
-                    expect(returnedUser.username).toBe('testCreate12');
-                    User.findOne({ username:'testCreate12'})
+                    expect(returnedUser.username).toBe('testCreate13');
+                    User.findOne({ username:'testCreate13'})
                     .remove(function (error){
                         done();
                     })

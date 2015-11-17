@@ -21,7 +21,7 @@
 	    
 	    //Create a new list   
 	    vm.createList = function(){
-	    	ListService.createList(vm.formData)
+	    	ListService.createList(vm.formData._boardid, vm.formData)
 	        .then(function (data) {
 	            vm.lists.push(data);
 	        })
