@@ -1,13 +1,17 @@
 var path = require('path'),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+	mongoose = require('mongoose');
 
 //models
-var User = require('../models/user')
+var User = require('../models/user'),
+	Board = require('../models/board');
 
 //Index
 exports.index = function (req,res){
 	var user = User;
-	user.find({}, function (error, data){
+	user.find({})
+	.populate('boards')
+	.exec(function (error, data) {
 		if (data) {
 			res.json(data);
 		} else if (error) {
