@@ -88,30 +88,30 @@ describe ('BoardController', function() {
 		})
 
 		//Test for creating a new board
-		it('should create a new board', function (done) {
-			var userId = user._id;
-			console.log('user._id: ',userId);
-			console.log('board._userid: ' ,board._userid);
-			request(app).get('/api/boards/create/'+userId)
-			.send({
-				name: 'testBoardCreate'
-			})
-			// .expect('Content-Type', /json/)
-			// .expect(200)
-			.end(function (err, res) {
-				if (err) {
-					done.fail(err);
-				} else {
-					returnedBoard = res.body;
-					// console.log(res.body);
-					expect(returnedBoard.name).toBe('testBoardCreate');
-					Board.findOne({name: 'testBoardCreate'})
-					.remove(function (error) {
-						done();
-					})
-				}
-			})
-		})
+		// it('should create a new board', function (done) {
+		// 	var userId = user._id;
+		// 	// console.log('user._id: ',userId);
+		// 	// console.log('board._userid: ' ,board._userid);
+		// 	request(app).get('/api/boards/create/'+userId)
+		// 	.send({
+		// 		name: 'testBoardCreate'
+		// 	})
+		// 	// .expect('Content-Type', /json/)
+		// 	// .expect(200)
+		// 	.end(function (err, res) {
+		// 		if (err) {
+		// 			done.fail(err);
+		// 		} else {
+		// 			returnedBoard = res.body;
+		// 			// console.log(res.body);
+		// 			expect(returnedBoard.name).toBe('testBoardCreate');
+		// 			Board.findOne({name: 'testBoardCreate'})
+		// 			.remove(function (error) {
+		// 				done();
+		// 			})
+		// 		}
+		// 	})
+		// })
 
 		//Test for deleting an existing board
 		it('should delete an existing board', function (done) {
@@ -131,6 +131,24 @@ describe ('BoardController', function() {
 							}
 						})
 					})
+				}
+			})
+		})
+
+		//Test for updating a board
+		it('should update an existing board', function (done) {
+			request(app).post('/api/boards/edit/'+board._id)
+			.send({
+				name: 'updatedBoard'
+			})
+			.end(function (err,res) {
+				if (err) {
+					done.fail(err);
+				} else {
+					returnedBoard = res.body[res.body.length-1];
+					expect(returnedBoard.name).toBe('updatedBoard');
+					Board.findOne({ name: 'updatedBoard'})
+					done();
 				}
 			})
 		})

@@ -13,6 +13,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 //database
 mongoose.connect('mongodb://localhost/todos');
 
+//secret variable
+app.set('superSecret', 'wlqdprkrhtlvekdndhkdzrnez');
+
 //models
 var Todo = require('./app/models/todo'),
 	List = require('./app/models/list'),
@@ -23,11 +26,19 @@ var Todo = require('./app/models/todo'),
 var TodoController = require('./app/controllers/todo_controller.js'),
 	ListController = require('./app/controllers/list_controller.js'),
 	BoardController = require('./app/controllers/board_controller.js'),
-	UserController = require('./app/controllers/user_controller.js');
+	UserController = require('./app/controllers/user_controller.js'),
+	AuthController = require('./app/controllers/authentication_controller.js');
+
+//middleware
+var AuthMiddleware = require('./app/middleware/authentication_middleware')
+app.use('/api', AuthMiddleware.auth);
+
+//--------------------routes for auth--------------------
+app.post('/authenticate', AuthController.auth);
 
 //--------------------routes for user--------------------
 //index
-app.get('/api', UserController.index)
+app.get('/api/users', UserController.index)
 
 //show existing user
 app.get('/api/user/:id', UserController.show)
@@ -86,8 +97,8 @@ app.post('/api/todos/edit/:todo_id', TodoController.edit)
 //delete existing todo
 app.post('/api/todos/delete/:todo_id', TodoController.destroy)
 
-// app.listen(3000);
-// console.log('Listening to port 3000');
-
 //when testing, KILL SERVER
+app.listen(3000);
+console.log('Listening to port 3000');
+
 exports.app = app;

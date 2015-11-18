@@ -8,7 +8,7 @@
 
 		service.getUsers = function(){
 			var deferred = $q.defer();
-			$http.get('/api')
+			$http.get('/api/users')
 			    .success(function (data){
 			    	deferred.resolve(data);
 			    })
