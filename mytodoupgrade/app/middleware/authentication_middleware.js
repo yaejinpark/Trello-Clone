@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken'),
 	express = require('express'),
-	app = express();
+	app = require('../../app');
 
 exports.auth = function (req,res,next) {
 	//check header or url parameters or post parameters for token
@@ -9,7 +9,7 @@ exports.auth = function (req,res,next) {
 	//decode token
 	if(token) {
 		// verifies secret and checks exp
-		jwt.verify(token, app.get('superSecret'), function (err, decoded) {
+		jwt.verify(token, app.app.get('superSecret'), function (err, decoded) {
 			if (err) {
 				return res.status(422).json({
 					success: false,

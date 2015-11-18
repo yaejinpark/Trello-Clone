@@ -145,6 +145,7 @@ describe ('BoardController', function() {
 				if (err) {
 					done.fail(err);
 				} else {
+					console.log(res.body);
 					returnedBoard = res.body[res.body.length-1];
 					expect(returnedBoard.name).toBe('updatedBoard');
 					Board.findOne({ name: 'updatedBoard'})
