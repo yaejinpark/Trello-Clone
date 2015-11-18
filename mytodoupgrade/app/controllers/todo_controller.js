@@ -22,15 +22,19 @@ exports.index = function (req,res){
 
 //Create New Todo Item
 exports.create = function(req,res){
-	var todo = new Todo ({name: req.body.name, _listid: req.body._listid});
-	var listId = req.body._listid;
+	var todo = new Todo ({name: req.body.name, _listid: req.params.list_id});
+	var listId = req.params.list_id;
 	todo.save(function (error,todo) {
 		if (todo) {
 			List.findOne({_id: listId}, function (err, list){
-				var id = mongoose.Types.ObjectId(todo._id);
-				list.todos.push(id)
-				list.save()
-				res.json(todo);
+				if (err) {
+					console.log(err);
+				} else {
+					var id = mongoose.Types.ObjectId(todo._id);
+					list.todos.push(id)
+					list.save()
+					res.json(todo);
+				}
 			})
 		} else if (error) {
 			console.error(error.stack);
