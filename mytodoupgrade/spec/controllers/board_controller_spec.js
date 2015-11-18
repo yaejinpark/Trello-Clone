@@ -15,7 +15,7 @@ describe ('BoardController', function() {
 		beforeEach(function (done){
 			User.create({
 				username: 'testUserforBoard',
-				pssword: 'password',
+				password: 'password',
 				email: 'potato@gmail.com'
 			}, function (error, newUser) {
 				if (error) {
@@ -34,7 +34,7 @@ describe ('BoardController', function() {
 							board = newBoard
 							List.create({
 								_boardid: board._id,
-								name: 'testList'
+								name: 'testListForBoard'
 							}, function (e, newList) {
 								if (e) {
 									console.log(e);
@@ -68,5 +68,71 @@ describe ('BoardController', function() {
 				}
 			})
 		});
+
+		//Test for showing a board
+		it('should show an existing board', function (done) {
+			request(app).get('/api/board/'+board._id)
+			.expect('Content-Type', /json/)
+			.expect(200)
+			.end(function (err, res){
+				if (err) {
+					done.fail(err);
+				} else {
+					// console.log(res.body);
+					expect(res.body.length).toEqual(1);
+					returnedBoard = res.body[0];
+					expect(returnedBoard.name).toBe('testBoard');
+					done();
+				}
+			})
+		})
+
+		//Test for creating a new board
+		it('should create a new board', function (done) {
+			var userId = user._id;
+			console.log('user._id: ',userId);
+			console.log('board._userid: ' ,board._userid);
+			request(app).get('/api/boards/create/'+userId)
+			.send({
+				name: 'testBoardCreate'
+			})
+			// .expect('Content-Type', /json/)
+			// .expect(200)
+			.end(function (err, res) {
+				if (err) {
+					done.fail(err);
+				} else {
+					returnedBoard = res.body;
+					// console.log(res.body);
+					expect(returnedBoard.name).toBe('testBoardCreate');
+					Board.findOne({name: 'testBoardCreate'})
+					.remove(function (error) {
+						done();
+					})
+				}
+			})
+		})
+
+		//Test for deleting an existing board
+		it('should delete an existing board', function (done) {
+			request(app).post('/api/boards/delete/'+board._id)
+			.end(function (err, res) {
+				if (err) {
+					done.fail(err);
+				} else {
+					Board.findOne({ _id: board._id})
+					.remove(function (error) {
+						Board.findOne({ _id: board._id}, function (err, board) {
+							if (err) {
+								done.fail(err);
+							} else {
+								expect(board).toBeNull()
+								done();
+							}
+						})
+					})
+				}
+			})
+		})
 	})
 })

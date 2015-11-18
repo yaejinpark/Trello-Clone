@@ -34,16 +34,19 @@ exports.show = function (req, res){
 
 //Create New Board
 exports.create = function(req,res){
-	var board = new Board ({name: req.body.name, _userid: req.body._userid});
+	var board = new Board ({name: req.body.name, _userid: req.params.user_id});
+	var userId = req.params.user_id;
 	board.save(function (error,data) {
 		if (data) {
-			//change to userId after authentication
-			// User.findOne({_id: userId}, function (err, user){
-			User.findOne({_id: '564a65ea919878b104801d3e'}, function (err, user){
-				var id = mongoose.Types.ObjectId(board._id);
-				user.boards.push(id)
-				user.save()
-				res.json(data);
+			User.findOne({_id: userId}, function (err, user){
+				if (err) {
+					console.log(err);
+				} else {
+					var id = mongoose.Types.ObjectId(board._id);
+					user.boards.push(id)
+					user.save()
+					res.json(data);	
+				}
 			})
 		} else if (error) {
 			console.error(error.stack);

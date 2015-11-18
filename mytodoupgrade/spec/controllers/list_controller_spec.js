@@ -129,5 +129,23 @@ describe ('ListController', function() {
 			})
 		})
 
+		//Test for updating an existing list
+		it('should update an existing list', function (done) {
+			request(app).post('/api/lists/edit/'+list._id)
+			.send({
+				name:'updatedNameList'
+			})
+			.end(function (err,res){
+				if (err) {
+					done.fail(err);
+				} else {
+					returnedList = res.body[res.body.length-1];
+					expect(returnedList.name).toBe('updatedNameList');
+					Todo.findOne({name: 'updatedNameList'})
+					done();
+				}
+			})
+		})
+
 	})
 })

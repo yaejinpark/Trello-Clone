@@ -8,7 +8,7 @@ describe ('UserController', function() {
     describe('with data', function() {
         var user;
 
-        beforeEach(function(done) {
+        beforeEach(function (done) {
             User.create({ 
                 username: 'testuser', 
                 password: 'testcreate', 
