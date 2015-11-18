@@ -34,15 +34,19 @@ exports.show = function (req, res){
 
 //Create New List
 exports.create = function(req,res){
-	var boardId = req.body._boardid;
-	var list = new List ({name: req.body.name, _boardid: req.body._boardid});
+	var list = new List ({name: req.body.name, _boardid: req.params.board_id});
+	var boardId = req.params.board_id;
 	list.save(function (error,data) {
 		if (data) {
 			Board.findOne({_id: boardId}, function (err, board){
-				var id = mongoose.Types.ObjectId(list._id);
-				board.lists.push(id)
-				board.save()
-				res.json(data);
+				if (err) {
+					console.log(err);
+				} else {
+					var id = mongoose.Types.ObjectId(list._id);
+					board.lists.push(id)
+					board.save()
+					res.json(data);
+				}
 			})
 		} else if (error) {
 			console.error(error.stack);

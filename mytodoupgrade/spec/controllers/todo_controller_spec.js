@@ -10,7 +10,7 @@ describe ('TodoController', function() {
         var todo;
         var list;
 
-        beforeEach(function(done) {
+        beforeEach(function (done) {
             List.create({
                 name: 'testListforTodo2'
             }, function (error, newList) {
@@ -71,7 +71,7 @@ describe ('TodoController', function() {
             });
         });
 
-        //Test for deleting a new user
+        //Test for deleting an existing todo item
         it('should delete an existing todo item', function (done) {
             request(app).post('/api/todos/delete/'+todo._id)
             .end(function (err, res){
