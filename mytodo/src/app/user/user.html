@@ -1,0 +1,14 @@
+<div class="container">
+    <h2>List of Users</h2>
+    <!-- buttons and forms-->
+    <div ui-sortable ng-model="userCtrl.users" id="users">
+        <div class="input-group" ng-repeat="user in userCtrl.users track by $index">
+            <input type="text" ng-model="user.username" class="form-control">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" ng-click="userCtrl.deleteUser(user._id)" aria-label="Remove">X</button>
+            </span>
+        </div>
+        <a class='btn btn-primary' href="#/boards"> Go Back to Boards</a>
+    </div> 
+
+</div>

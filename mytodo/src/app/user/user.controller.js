@@ -14,7 +14,7 @@
 	    	vm.users = data;
 	    })
 	    .catch(function (err) {
-            console.log('Error: ' + err);
+            console.log('Error: ', err);
         })
 
 		//Create a new User
@@ -24,7 +24,7 @@
 		   		vm.users.push(data);
 		   })
 		   .catch(function (err) {
-		       console.log('Error: ' + err);
+		       console.log('Error: ', err);
 		   })
 		};
 
@@ -35,7 +35,7 @@
 				vm.users = data;
 			})
 		    .catch(function (err) {
-	            console.log('Error: ' + err);
+	            console.log('Error: ', err);
 	        })
 		};
 
@@ -51,7 +51,7 @@
 	    		}
 			})
 	    	.catch(function (err) {
-                console.log('Error: ' + err);
+                console.log('Error: ', err);
             })
 		};
 
@@ -62,7 +62,7 @@
 				console.log('User information update successful!');
 			})
 			.catch(function (err) {
-			    console.log('Error: ' + err);
+			    console.log('Error: ', err);
 			})
 		};
 	}])

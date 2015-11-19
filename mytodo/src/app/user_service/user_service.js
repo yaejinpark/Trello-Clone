@@ -14,7 +14,7 @@
 			    })
 			    .error(function (data){
 			    	deferred.reject('Error: ' + data);
-			        console.log('Error: ' +  data);
+			        console.log('Error: ',  data);
 			    });
 			    return deferred.promise;
 		};
