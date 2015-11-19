@@ -4,6 +4,7 @@ var express = require('express'),
 	router = express.Router(),
 	path = require('path'),
 	_ = require('lodash'),
+	bcrypt = require('bcrypt-nodejs'),
 	bodyParser = require('body-parser');
 
 //using body-parser
@@ -12,6 +13,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 //database
 mongoose.connect('mongodb://localhost/todos');
+
+//secret variable
+app.set('superSecret', 'wlqdprkrhtlvekdndhkdzrnez');
 
 //models
 var Todo = require('./app/models/todo'),
@@ -24,10 +28,19 @@ var TodoController = require('./app/controllers/todo_controller.js'),
 	ListController = require('./app/controllers/list_controller.js'),
 	BoardController = require('./app/controllers/board_controller.js'),
 	UserController = require('./app/controllers/user_controller.js');
+	AuthController = require('./app/controllers/authentication_controller.js');
+
+//middleware
+var AuthMiddleware = require('./app/middleware/authentication_middleware')
+app.use('/api', AuthMiddleware.auth);
+
+//--------------------routes for auth--------------------
+//auth and login
+app.post('/authenticate', AuthController.auth);
 
 //--------------------routes for user--------------------
 //index
-app.get('/api', UserController.index)
+app.get('/api/users', UserController.index)
 
 //show existing user
 app.get('/api/user/:id', UserController.show)
@@ -49,7 +62,7 @@ app.get('/api/boards', BoardController.index)
 app.get('/api/board/:board_id', BoardController.show)
 
 //create new board
-app.post('/api/boards/create', BoardController.create)
+app.post('/api/boards/create/:user_id', BoardController.create)
 
 //update existing board
 app.post('/api/boards/edit/:board_id', BoardController.edit)
@@ -65,7 +78,7 @@ app.get('/api/lists', ListController.index)
 app.get('/api/list/:list_id', ListController.show)
 
 //create new list
-app.post('/api/lists/create', ListController.create)
+app.post('/api/lists/create/:board_id/', ListController.create)
 
 //update existing list
 app.post('/api/lists/edit/:list_id', ListController.edit)
@@ -86,8 +99,8 @@ app.post('/api/todos/edit/:todo_id', TodoController.edit)
 //delete existing todo
 app.post('/api/todos/delete/:todo_id', TodoController.destroy)
 
-app.listen(3000);
-console.log('Listening to port 3000');
-
 //when testing, KILL SERVER
-// exports.app = app;
+// app.listen(3000);
+// console.log('Listening to port 3000');
+
+module.exports.app = app;

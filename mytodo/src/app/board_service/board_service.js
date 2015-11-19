@@ -20,9 +20,9 @@
 	    }
 
 		//Create a new Board
-		service.createBoard = function(formData){
+		service.createBoard = function(userId, formData){
 			var deferred = $q.defer();
-		    $http.post('api/boards/create', formData)
+		    $http.post('api/boards/create/' + userId, formData)
 		         .success(function (data){
 		            formData = {};
 		            deferred.resolve(data);
@@ -59,7 +59,7 @@
 		            console.log('Error: ' +  data);
 		         });
 		         return deferred.promise;
-		}
+		};
 
 		//Update existing list
 		service.updateBoard = function(id, updatedName){
@@ -73,7 +73,7 @@
 		            console.log('Error: ' +  data);
 		         });
 		         return deferred.promise;
-		}
+		};
 		return service;
 	}]);
 })();

@@ -33,10 +33,12 @@
         vm.deleteTodo = function(id){
             TodoService.deleteTodo(id)
             .then(function (data) {
-                var index = vm.todos.indexOf(data);
-                vm.todos.splice(index, 1);
-                // vm.todos = vm.todos.splice(index, 1);
-                // vm.todos on the left overwrites, requiring you to refresh to see the change
+                for (var i = 0; i < vm.todos.length; i++){
+                    if (vm.todos[i]._id == data._id){
+                        vm.todos.splice(i, 1);
+                        break;
+                    }
+                }
             })
             .catch(function (err) {
                 console.log('Error: ' + err);

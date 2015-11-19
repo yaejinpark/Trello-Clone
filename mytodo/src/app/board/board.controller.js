@@ -21,7 +21,7 @@
 
 		//Create a new Board
 		vm.createBoard = function(){
-	    	BoardService.createBoard(vm.formData)
+	    	BoardService.createBoard(vm.formData._userid, vm.formData)
 	        .then(function (data) {
 	            vm.boards.push(data);
 	        })
@@ -39,19 +39,23 @@
 		    .catch(function (err) {
 	            console.log('Error: ' + err);
 	        })
-	    }
+	    };
 
 		//Delete an existing board    
 		vm.deleteBoard = function(id){
 		    BoardService.deleteBoard(id)
 	    	.then(function (data) {
-	    		var index = vm.boards.indexOf(data);
-	    		vm.boards.splice(index, 1);
+	    		for (var i = 0; i < vm.boards.length; i++){
+	    			if (vm.boards[i]._id == data._id){
+			    		vm.boards.splice(i, 1);
+			    		break;
+	    			}
+	    		}
 	    	})
 	    	.catch(function (err) {
                 console.log('Error: ' + err);
             })
-		}
+		};
 
 	    //Update an existing board
 	    vm.updateBoard = function(id, updatedName){
@@ -62,6 +66,6 @@
             .catch(function (err) {
                 console.log('Error: ' + err);
             })
-	    }
-	}]);
+	    };
+	}])
 })();

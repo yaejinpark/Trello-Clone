@@ -21,7 +21,7 @@
 	    
 	    //Create a new list   
 	    vm.createList = function(){
-	    	ListService.createList(vm.formData)
+	    	ListService.createList(vm.formData._boardid, vm.formData)
 	        .then(function (data) {
 	            vm.lists.push(data);
 	        })
@@ -45,8 +45,12 @@
 	    vm.deleteList = function(id){
 	    	ListService.deleteList(id)
 	    	.then(function (data) {
-	    		var index = vm.lists.indexOf(data);
-	    		vm.lists.splice(index, 1);
+	    		for (var i = 0; i < vm.lists.length; i++){
+	    			if (vm.lists[i]._id == data._id){
+			    		vm.lists.splice(i, 1);
+			    		break;
+	    			}
+	    		}
 	    	})
 	    	.catch(function (err) {
                 console.log('Error: ' + err);

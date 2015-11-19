@@ -1,8 +1,10 @@
 var path = require('path'),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+	mongoose = require('mongoose');
 
 //models (this already fetches mongoose through model, no need to call it again)
-var Todo = require('../models/todo');
+var Todo = require('../models/todo'),
+	List = require('../models/list');
 
 //Index
 exports.index = function (req,res){
@@ -20,14 +22,19 @@ exports.index = function (req,res){
 
 //Create New Todo Item
 exports.create = function(req,res){
-	var todo = new Todo ({name: req.body.name, _listid: req.body._listid});
-	var listId = req.body._listid;
-	todo.save(function (error,data) {
-		if (data) {
-			Todo.findOne({ '_id': data._id})
-			.exec(function (error,todo){
-				// console.log(todo);
-				res.json(todo);
+	var todo = new Todo ({name: req.body.name, _listid: req.params.list_id});
+	var listId = req.params.list_id;
+	todo.save(function (error,todo) {
+		if (todo) {
+			List.findOne({_id: listId}, function (err, list){
+				if (err) {
+					console.log(err);
+				} else {
+					var id = mongoose.Types.ObjectId(todo._id);
+					list.todos.push(id)
+					list.save()
+					res.json(todo);
+				}
 			})
 		} else if (error) {
 			console.error(error.stack);

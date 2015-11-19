@@ -1,14 +1,18 @@
 var path = require('path'),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+	mongoose = require('mongoose');
 
 //models
-var Board = require('../models/board')
+var Board = require('../models/board'),
+	User = require('../models/user');
 
 //Index
 exports.index = function (req,res){
 	var userId = req.param('userId')
 	var board = Board;
-	board.find({_userid: userId}, function (error, data){
+	board.find({_userid: userId})
+	.populate('lists')
+	.exec(function (error, data) {
 		if (data) {
 			res.json(data);
 		} else if (error) {
@@ -30,10 +34,20 @@ exports.show = function (req, res){
 
 //Create New Board
 exports.create = function(req,res){
-	var board = new Board ({name: req.body.name, _userid: req.body._userid});
+	var board = new Board ({name: req.body.name, _userid: req.params.user_id});
+	var userId = req.params.user_id;
 	board.save(function (error,data) {
 		if (data) {
-			res.json(data);
+			User.findOne({_id: userId}, function (err, user){
+				if (err) {
+					console.log(err);
+				} else {
+					var id = mongoose.Types.ObjectId(board._id);
+					user.boards.push(id)
+					user.save()
+					res.json(data);	
+				}
+			})
 		} else if (error) {
 			console.error(error.stack);
 		}
