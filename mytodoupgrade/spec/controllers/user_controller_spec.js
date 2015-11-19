@@ -1,13 +1,20 @@
+//necessary modules
 var request = require('supertest'),
+    bcrypt = require('bcrypt-nodejs'),
     app = require('../../app').app;
 
+//model
 var User = require ('../../app/models/user');
+
+//variables
+var auth = {};
+
+beforeAll(loginUser(auth));
 
 describe ('UserController', function() {
 
     describe('with data', function() {
         var user;
-        var auth = {};
 
         beforeEach(function (done) {
             User.create({ 
@@ -37,8 +44,6 @@ describe ('UserController', function() {
 
         //Test for showing existing user
         it('should return an existing user', function (done) {
-            console.log(auth);
-            console.log(auth.token);
             request(app)
             .get('/api/user/'+user._id)
             .set('X-ACCESS-TOKEN', auth.token)
@@ -83,52 +88,57 @@ describe ('UserController', function() {
         });
 
         //Test for deleting a new user
-        // it('should delete an existing user', function (done) {
-        //     request(app).post('/api/users/delete/'+user._id)
-        //     .end(function (err, res){
-        //         if (err) {
-        //           done.fail(err);
-        //         } else {
-        //             User.findOne({ _id: user._id})
-        //             .remove(function (error){
-        //                 User.findOne({ _id: user._id}, function (err,user){
-        //                     if (err) {
-        //                         done.fail(err);
-        //                     } else {
-        //                         expect(user).toBeNull()
-        //                         done();      
-        //                     }
-        //                 })
-        //             })
-        //         }
-        //     });
-        // });
+        it('should delete an existing user', function (done) {
+            request(app)
+            .post('/api/users/delete/'+user._id)
+            .set('X-ACCESS-TOKEN', auth.token)
+            .end(function (err, res){
+                if (err) {
+                  done.fail(err);
+                } else {
+                    User.findOne({ _id: user._id})
+                    .remove(function (error){
+                        User.findOne({ _id: user._id}, function (err,user){
+                            if (err) {
+                                done.fail(err);
+                            } else {
+                                expect(user).toBeNull()
+                                done();      
+                            }
+                        })
+                    })
+                }
+            });
+        });
 
         //Test for updating a user
-        // it('should update an existing user', function (done){
-        //     request(app).post('/api/users/edit/'+user._id)
-        //     .send({
-        //         password:'updatedPw',
-        //         email:'update@test.com'
-        //     })
-        //     .end(function (err,res){
-        //         if (err) {
-        //           done.fail(err);
-        //         } else {
-        //             returnedUser = res.body[res.body.length-1];
-        //             expect(returnedUser.password).toBe('updatedPw');
-        //             User.findOne({ email:'update@test.com'})
-        //             done();
-        //         }
-        //     })
-        // })
+        it('should update an existing user', function (done){
+            request(app)
+            .post('/api/users/edit/'+user._id)
+            .set('X-ACCESS-TOKEN', auth.token)
+            .send({
+                password: 'updatedPw',
+                email:'update@test.com'
+            })
+            .end(function (err,res){
+                if (err) {
+                  done.fail(err);
+                } else {
+                    returnedUser = res.body[res.body.length-1];
+                    expect(returnedUser.email).toBe('update@test.com');
+                    User.findOne({ email:'update@test.com'})
+                    done();
+                }
+            })
+        })
 
     });
 });
 
+//****NOTE: In order for this function to work, you have to manually make that account.
 function loginUser(auth) {
     return function (done) {
-        request
+        request(app)
         .post('/authenticate')
         .send({
             username: 'imapotato',
@@ -142,4 +152,5 @@ function loginUser(auth) {
             return done();
         }
     }
+    return done();
 }
