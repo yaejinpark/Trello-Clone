@@ -1,9 +1,9 @@
 var app = require('../../app'),
 	User = require('../models/user'),
+	bcrypt = require('bcrypt-nodejs'),
 	jwt = require('jsonwebtoken');
 
 exports.auth = function (req, res){
-	console.log(app.app.get('superSecret'));
 	// find the user
 	User.findOne({username: req.body.username}, function (err, user) {
 
@@ -14,7 +14,8 @@ exports.auth = function (req, res){
 		} else if (user) {
 
 			// check if password matches
-			if (user.password != req.body.password) {
+			if (!bcrypt.compareSync(req.body.password, user.password)) {
+			// if (user.password != req.body.password) {
 				res.status(401).json({ success: false, message: 'Authentication failed. Wrong password.' });
 			} else {
 			    // if user is found and password is right

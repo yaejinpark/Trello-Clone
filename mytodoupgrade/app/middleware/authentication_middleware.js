@@ -1,8 +1,15 @@
 var jwt = require('jsonwebtoken'),
 	express = require('express'),
-	app = require('../../app');
+	app = require('../../app'),
+	bcrypt = require('bcrypt-nodejs');
 
 exports.auth = function (req,res,next) {
+	//Refactor so that the code has only one return
+
+	if(req.originalUrl == '/api/users/create'|| req.originalUrl == '/authenticate') {
+		next();
+		return;
+	}
 	//check header or url parameters or post parameters for token
 	var token = req.body.token || req.query.token || req.headers['x-access-token'];
 

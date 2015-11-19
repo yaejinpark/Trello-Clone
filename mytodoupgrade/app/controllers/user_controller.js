@@ -1,6 +1,8 @@
 var path = require('path'),
 	bodyParser = require('body-parser'),
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+	jwt = require('jsonwebtoken'),
+	bcrypt = require('bcrypt-nodejs');
 
 //models
 var User = require('../models/user'),
@@ -33,10 +35,14 @@ exports.show = function(req, res) {
 
 //Sign Up (Create new account)
 exports.create = function (req, res){
+	var password = req.body.password,
+		salt = bcrypt.genSaltSync(10),
+		hash = bcrypt.hashSync(password,salt);
+
 	var user = new User ({
 		username: req.body.username,
 		email: req.body.email,
-		password: req.body.password,
+		password: hash
 	});
 	user.save(function (error, data){
 		if (data){
@@ -49,9 +55,13 @@ exports.create = function (req, res){
 
 //Update User Information (Only password and e-mail)
 exports.edit = function (req, res){
+	var password = req.body.password,
+		salt = bcrypt.genSaltSync(10),
+		hash = bcrypt.hashSync(password,salt);
+
 	var query = { _id: req.params.id};
 	User.update(query, {
-		password: req.body.password, 
+		password: hash, 
 		email: req.body.email}, 
 		function (error, data){
 			User.find({}, function (error, user){
