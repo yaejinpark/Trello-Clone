@@ -3,8 +3,10 @@
 
 	angular
 	.module('mytodo')
-	.factory('AuthService', ['$http', '$cookieStore', '$rootScope', '$timeout',
-	function ($http, $cookieStore, $rootScope, $timeout) {
+	.factory('AuthService', AuthService);
+
+	AuthService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout']
+	function AuthService($http, $cookieStore, $rootScope) {
 		var service = {};
 
 		service.signin = function(username, password, callback) {
@@ -34,5 +36,5 @@
 			$http.defaults.headers.common.Authorization = 'Basic;'
 		};
 		return service;
-	}])
+	}
 })();

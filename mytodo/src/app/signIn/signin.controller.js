@@ -3,8 +3,10 @@
 
 	angular
 	.module('mytodo')
-	.controller('SigninController', ['$location', 'AuthService', 
-	function ($location, AuthService) {
+	.controller('SigninController', SigninController)
+
+	SigninController.$inject = ['$location', 'AuthService']
+	function SigninController ($location, AuthService) {
 		var vm = this;
 
 		vm.signin = signin;
@@ -24,8 +26,7 @@
 					vm.dataLoading = false;
 				}
 			});
-		};
-
-	}]);
+		}
+	}
 
 })();

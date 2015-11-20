@@ -3,8 +3,10 @@
 
 	angular
 	.module('mytodo')
-	.controller('SignupController', ['$location', 'UserService', 
-	function ($location, UserService) {
+	.controller('SignupController', SignupController)
+
+	SignupController.$inject = ['$location', 'UserService']
+	function SignupController ($location, UserService) {
 		var vm = this;
 
 		vm.signup = signup;
@@ -18,10 +20,9 @@
 				} else {
 					vm.dataLoading = false;
 				}
-
 			});
-		};
+		}
 
-	}]);
+	}
 
-})();
+})()

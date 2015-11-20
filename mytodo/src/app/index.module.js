@@ -1,15 +1,15 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular
+    angular
     .module('mytodo', [
-    	'ngAnimate', 
-    	'ngCookies', 
-    	'ngTouch', 
-    	'ngSanitize', 
-    	'ngResource', 
-    	'ngRoute', 
-    	'ui.bootstrap', 
-    	'toastr']);
+        'ngAnimate', 
+        'ngCookies', 
+        'ngTouch', 
+        'ngSanitize', 
+        'ngResource', 
+        'ngRoute', 
+        'ui.bootstrap', 
+        'toastr']);
 
 })();
