@@ -24,6 +24,8 @@
 			var deferred = $q.defer();
 			$http.post('/api/users/create', formData)
 				 .success(function (data){
+				 	//line 28 is needed for signup controller
+				 	data.success = true;
 				 	formData = {};
 				 	deferred.resolve(data);
 				 })

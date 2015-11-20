@@ -1,16 +1,16 @@
-<div class="container" ng-controller="UserController as userCtrl">
+<div class="container">
     <h2>Create Account</h2>
-    <form name="form" ng-submit="userCtrl.createUser()" role="form">
+    <form name="form" ng-submit="signupCtrl.signup()" role="form">
         <div class="form-group">
-            <input type="text" placeholder="Username" name="username" id="username" class="form-control" ng-model="userCtrl.formData.username" required />
+            <input type="text" placeholder="Username" name="username" id="username" class="form-control" ng-model="signupCtrl.formData.username" required />
             <!-- <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span> -->
         </div>
         <div class="form-group">
-            <input type="text" placeholder="Password" name="password" id="password" class="form-control" ng-model="userCtrl.formData.password" required />
+            <input type="text" placeholder="Password" name="password" id="password" class="form-control" ng-model="signupCtrl.formData.password" required />
             <!-- <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span> -->
         </div>
         <div class="form-group">
-            <input type="text" placeholder="E-mail" name="email" id="email" class="form-control" ng-model="userCtrl.formData.email" required />
+            <input type="text" placeholder="E-mail" name="email" id="email" class="form-control" ng-model="signupCtrl.formData.email" required />
             <!-- <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">E-mail is required</span> -->
         </div>
         <div class="form-actions">

@@ -24,7 +24,6 @@
 					token: token
 				}
 			};
-
 			$http.defaults.headers.common['X-ACCESS-TOKEN'] = token;
 			$cookieStore.put('globals', $rootScope.globals);
 		};

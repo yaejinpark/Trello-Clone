@@ -21,7 +21,6 @@
 					AuthService.setCredentials(credentials.username, credentials.token);
 					$location.path('/boards');
 				} else {
-					console.log(res.message);
 					vm.dataLoading = false;
 				}
 			});
