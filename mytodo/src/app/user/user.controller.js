@@ -9,13 +9,16 @@
 		vm.formData = {};
 
 		//List of Users
-	    UserService.getUsers()
-	    .then(function (data) {
-	    	vm.users = data;
-	    })
-	    .catch(function (err) {
-            console.log('Error: ', err);
-        })
+		vm.getUsers = function() {
+		    UserService.getUsers()
+		    .then(function (data) {
+		    	vm.users = data;
+		    })
+		    .catch(function (err) {
+	            console.log('Error: ', err);
+	        })
+
+		}
 
 		//Create a new User
 		vm.createUser = function(){

@@ -17,7 +17,7 @@
 		function signin() {
 			vm.dataLoading = true;
 			AuthService.signin(vm.username, vm.password, function (credentials) {
-				if (res.success) {
+				if (credentials) {
 					AuthService.setCredentials(credentials.username, credentials.token);
 					$location.path('/boards');
 				} else {
