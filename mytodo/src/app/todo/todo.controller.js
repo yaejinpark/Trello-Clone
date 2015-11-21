@@ -24,7 +24,7 @@
 
 		//Create a new todo item
 		vm.createTodo = function(){
-			TodoService.createTodo(vm.formData)
+			TodoService.createTodo(listId, vm.formData)
 			.then(function (data) {
 				vm.todos.push(data);
 			})

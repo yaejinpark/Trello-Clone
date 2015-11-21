@@ -1,9 +1,6 @@
 var express = require('express'),
 	mongoose = require('mongoose'),
 	app = express(),
-	router = express.Router(),
-	path = require('path'),
-	_ = require('lodash'),
 	bcrypt = require('bcrypt-nodejs'),
 	bodyParser = require('body-parser');
 

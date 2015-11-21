@@ -8,7 +8,7 @@ var Board = require('../models/board'),
 
 //Index
 exports.index = function (req,res){
-	var userId = req.param('userId')
+	var userId = req.user._id;
 	var board = Board;
 	board.find({_userid: userId})
 	.populate('lists')
@@ -34,8 +34,8 @@ exports.show = function (req, res){
 
 //Create New Board
 exports.create = function(req,res){
-	var board = new Board ({name: req.body.name, _userid: req.params.user_id});
-	var userId = req.params.user_id;
+	var userId = req.user._id;
+	var board = new Board ({name: req.body.name, _userid: userId});
 	board.save(function (error,data) {
 		if (data) {
 			User.findOne({_id: userId}, function (err, user){

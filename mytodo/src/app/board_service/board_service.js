@@ -17,8 +17,8 @@
 					deferred.resolve(data);
 				})
 				.error(function (data){
-					deferred.reject('Error: ' + data);
-					$log.debug('Error: ' +  data);
+					deferred.reject(data);
+					$log.error('Error: ' ,  data);
 				});
 				return deferred.promise;
 		}
@@ -33,7 +33,7 @@
 				})
 				.error(function (data){
 					deferred.reject('Error: ' + data);
-					$log.debug('Error: ' +  data);
+					$log.error('Error: ' ,  data);
 				});
 				return deferred.promise;
 		};

@@ -23,9 +23,9 @@
 		}
 
 		//Create a new todo item
-		service.createTodo = function(formData) {
+		service.createTodo = function(listId,formData) {
 			var deferred = $q.defer();
-			$http.post('api/todos/create/', formData)
+			$http.post('api/todos/'+listId, formData)
 				.success(function (data){
 					formData = {};
 					deferred.resolve(data);

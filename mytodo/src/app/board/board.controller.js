@@ -29,7 +29,7 @@
 				vm.boards.push(data);
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' , err);
 			})
 		};
 

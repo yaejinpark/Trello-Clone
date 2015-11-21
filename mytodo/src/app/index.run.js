@@ -3,7 +3,7 @@
 
 	angular
 	.module('mytodo')
-	// .run(loadAuth)
+	.run(loadAuth)
 	.run(runBlock);
 
 	loadAuth.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
