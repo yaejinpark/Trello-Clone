@@ -11,6 +11,7 @@ exports.index = function (req,res){
 	var boardId = req.param('boardId')
 	var list = List;
 	list.find({_boardid: boardId})
+	.sort({ name: 1})
 	.populate('todos')
 	.exec(function (error, data) {
 		if (data) {

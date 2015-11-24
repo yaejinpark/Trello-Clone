@@ -139,7 +139,7 @@ describe ('UserController', function() {
 function loginUser(auth) {
     return function (done) {
         request(app)
-        .post('/authenticate')
+        .post('/api/authenticate')
         .send({
             username: 'imapotato',
             password: 'hiFren'

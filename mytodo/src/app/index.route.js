@@ -8,9 +8,19 @@
   function routeConfig($routeProvider) {
     $routeProvider
     .when('/', {
-      templateUrl: 'app/user/signin.html',
-      controller: 'UserController',
-      controllerAs: 'user'
+      templateUrl: 'app/signIn/signin.html',
+      controller: 'SigninController',
+      controllerAs: 'signinCtrl'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+
+  $routeProvider
+    .when('/signup', {
+      templateUrl: 'app/signUp/signup.html',
+      controller: 'SignupController',
+      controllerAs: 'signupCtrl'
     })
     .otherwise({
       redirectTo: '/'
@@ -18,7 +28,7 @@
 
     $routeProvider
     .when('/users', {
-      templateUrl: 'app/user/signup.html',
+      templateUrl: 'app/user/user.html',
       controller: 'UserController',
       controllerAs: 'userCtrl'
     })

@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken'),
 exports.auth = function (req,res,next) {
 	//Refactor so that the code has only one return
 
-	if(req.originalUrl == '/api/users/create'|| req.originalUrl == '/authenticate') {
+	if(req.originalUrl == '/api/users/create'|| req.originalUrl == '/api/authenticate') {
 		next();
 		return;
 	}
@@ -24,7 +24,7 @@ exports.auth = function (req,res,next) {
 				})
 			} else {
 				// if everything is good, save to request for use in other routes				
-				req.decoded = decoded;
+				req.user = decoded;
 				next();
 			}
 		});

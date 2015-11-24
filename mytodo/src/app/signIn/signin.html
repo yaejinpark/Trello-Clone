@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Sign In</h2>
+    <form name="form" ng-submit="signinCtrl.signin()" role="form">
+        <div class="form-group">
+            <input type="text" placeholder="Username" name="username" id="username" class="form-control" ng-model="signinCtrl.username" required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Password" name="password" id="password" class="form-control" ng-model="signinCtrl.password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || signinCtrl.dataLoading" class="btn btn-primary">Sign In</button>
+            <a href="#/signup" class="btn btn-link">Create Account</a>
+        </div>
+</div>
