@@ -9,6 +9,7 @@ var Board = require('../models/board'),
 //Index
 exports.index = function (req,res){
 	var userId = req.user._id;
+	console.log(req.user);
 	var board = Board;
 	board.find({_userid: userId})
 	.sort({ name: 1})

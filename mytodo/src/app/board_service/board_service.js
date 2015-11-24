@@ -7,7 +7,6 @@
 
 	BoardService.$inject = ['$log','$http','$q']
 	function BoardService($log, $http, $q) {
-	// .factory('BoardService', ['$log','$http','$q', function ($log, $http, $q) {
 		var service = {};
 
 		service.getBoards = function(userId) {

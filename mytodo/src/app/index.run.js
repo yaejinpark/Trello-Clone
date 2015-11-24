@@ -14,7 +14,7 @@
 		}
 
 		$rootScope.$on('$locationChangeStart', function (event, next, current) {
-			var restrictedPage = $.inArray($location.path(), ['/', '/users']) === -1;
+			var restrictedPage = $.inArray($location.path(), ['/', '/users', '/signup']) === -1;
 			var signedIn = $rootScope.globals.currentUser;
 
 			if (restrictedPage && !signedIn) {

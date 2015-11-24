@@ -1,5 +1,6 @@
 <div class="container">
     <h2>Your Current Boards</h2>
+    <!-- <h2>{{boardCtrl.currentUserName}}</h2> -->
     <!-- Boards input -->
     <form role="form" ng-submit="boardCtrl.createBoard()">
         <div class="row">
@@ -19,7 +20,7 @@
             <span class="input-group-btn">
                 <a class='btn btn-primary' href="#/lists?boardId={{board._id}}&boardName={{board.name}}">Show Board</a>
                 <button class="btn btn-default" ng-click="boardCtrl.updateBoard(board._id, board.name)" aria-label="Update">Edit</button>
-                <button class="btn btn-danger" ng-click="boardCtrl.deleteBoard(board._id)" aria-label="Remove">X</button>å
+                <button class="btn btn-danger" ng-click="boardCtrl.deleteBoard(board._id)" aria-label="Remove">X</button>
             </span>
         </p>
     </div> 

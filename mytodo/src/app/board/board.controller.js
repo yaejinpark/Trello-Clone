@@ -11,9 +11,11 @@
 		vm.boards = [];
 		vm.formData = {};
 		var userId = $routeParams.userId;
+		vm.currentUserName = $routeParams.currentUserName;
 		vm.formData._userid = userId;
 
 		//List of Boards (with their userId)
+		console.log(userId);
 		BoardService.getBoards(userId)
 		.then(function (data) {
 			vm.boards = data;
