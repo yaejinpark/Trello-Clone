@@ -66,6 +66,11 @@ exports.edit = function (req,res){
 	})
 }
 
+//Invite user
+// exports.inviteUser = function (req,res){
+
+// }
+
 //Destroy Existing board
 exports.destroy = function (req,res){
 	var board = new Board({_id: req.params.board_id});

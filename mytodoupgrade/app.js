@@ -64,6 +64,9 @@ app.post('/api/boards/create/:user_id', BoardController.create)
 //update existing board
 app.post('/api/boards/edit/:board_id', BoardController.edit)
 
+//invite non-creator users to board
+//app.post('/api/board/:board_id/invite/:member_id')
+
 //delete existing board
 app.post('/api/boards/delete/:board_id', BoardController.destroy)
 
