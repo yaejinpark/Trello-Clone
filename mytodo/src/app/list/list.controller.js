@@ -11,6 +11,7 @@
 		vm.lists = [];
 		vm.formData = {};
 		var boardId = $routeParams.boardId;
+		vm.boardName = $routeParams.boardName;
 		vm.formData._boardid = boardId;
 
 		//List of lists (With their boardId)

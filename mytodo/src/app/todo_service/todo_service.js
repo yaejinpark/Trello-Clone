@@ -9,10 +9,13 @@
 	function TodoService ($log, $http, $q) {
 		var service = {};
 
+		//Show Todos with same listId
 		service.getTodos = function(listId) {
+			console.log('reached service', listId);
 			var deferred = $q.defer();
 			$http.get('api/todos?listId=' + listId)
 				.success(function (data){
+					console.log('data in service', data);
 					deferred.resolve(data);
 				})
 				.error(function (data){

@@ -11,6 +11,7 @@ exports.index = function (req,res){
 	var userId = req.user._id;
 	var board = Board;
 	board.find({_userid: userId})
+	.sort({ name: 1})
 	.populate('lists')
 	.exec(function (error, data) {
 		if (data) {

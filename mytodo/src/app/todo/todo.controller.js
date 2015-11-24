@@ -8,22 +8,26 @@
 	TodoController.$inject = ['$log','$routeParams','TodoService']
 	function TodoController ($log, $routeParams, TodoService) {
 		var vm = this;
-		vm.todos = [];
-		vm.formData = {};
-		var listId = $routeParams.listId;
-		vm.formData._listid = listId;
+		// vm.todos = [];
+		// vm.formData = {};
+		// var listId = $routeParams.listId;
+		// vm.formData._listid = listId;
 
 		//List of todos (with their listId)
-		TodoService.getTodos(listId)
-		.then(function (data) {
-			vm.todos = data;
-		})
-		.catch(function (err) {
-			$log.debug('Error: ' + err);
-		})
+		vm.getTodos = function (listId) {
+			console.log('getting todos', listId);
+			TodoService.getTodos(listId)
+			.then(function (data) {
+				vm.todos = data;
+				console.log(data);
+			})
+			.catch(function (err) {
+				$log.debug('Error: ' + err);
+			})
+		}
 
 		//Create a new todo item
-		vm.createTodo = function(){
+		vm.createTodo = function(listId){
 			TodoService.createTodo(listId, vm.formData)
 			.then(function (data) {
 				vm.todos.push(data);
