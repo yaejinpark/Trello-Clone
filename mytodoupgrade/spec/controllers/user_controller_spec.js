@@ -48,8 +48,6 @@ describe ('UserController', function() {
             .get('/api/user/'+user._id)
             .set('X-ACCESS-TOKEN', auth.token)
             .expect('Content-Type', /json/)
-            //Making sure that Content-Type is json, not some other element (like html header)
-            //Basically checking that the header type contains the word json
             .expect(200)
             .end(function (err, res){
                 if (err) {
@@ -71,6 +69,7 @@ describe ('UserController', function() {
                 password: 'createPw',
                 email: 'create14@test.com'
             })
+            .set('X-ACCESS-TOKEN', auth.token)
             .expect('Content-Type', /json/)
             .expect(200)
             .end(function (err, res){
