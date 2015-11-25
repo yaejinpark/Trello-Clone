@@ -18,7 +18,7 @@
 				vm.users = data;
 			})
 			.catch(function (err) {
-				$log.debug('Error: ', err);
+				$log.error('Error: ', err);
 			})
 
 		}
@@ -30,7 +30,7 @@
 				vm.users.push(data);
 			})
 			.catch(function (err) {
-				$log.debug('Error: ', err);
+				$log.error('Error: ', err);
 			})
 		};
 
@@ -41,7 +41,7 @@
 				vm.users = data;
 			})
 			.catch(function (err) {
-				$log.debug('Error: ', err);
+				$log.error('Error: ', err);
 			})
 		};
 
@@ -57,7 +57,7 @@
 				}
 			})
 			.catch(function (err) {
-				$log.debug('Error: ', err);
+				$log.error('Error: ', err);
 			})
 		};
 
@@ -65,10 +65,10 @@
 		vm.updateUser = function(id, updatedPass, updatedEmail) {
 			UserService.updateUser(id, updatedPass, updatedEmail)
 			.then(function () {
-				$log.debug('User information update successful!');
+				$log.error('User information update successful!');
 			})
 			.catch(function (err) {
-				$log.debug('Error: ', err);
+				$log.error('Error: ', err);
 			})
 		};
 	}

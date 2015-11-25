@@ -18,7 +18,7 @@
 				})
 				.error(function (data){
 					deferred.reject('Error: ' + data);
-					$log.debug('Error: ' +  data);
+					$log.error('Error: ' +  data);
 				});
 				return deferred.promise;     
 		}
@@ -33,7 +33,7 @@
 				})
 				.error(function (data){
 					deferred.reject('Error: ' + data);
-					$log.debug('Error: ' +  data);
+					$log.error('Error: ' +  data);
 				});
 				return deferred.promise;     
 		}
@@ -47,7 +47,7 @@
 				})
 				.error(function (data){
 					deferred.reject('Error: ' + data);
-					$log.debug('Error: ' +  data);
+					$log.error('Error: ' +  data);
 				});
 				return deferred.promise;
 		}
@@ -61,7 +61,7 @@
 				})
 				.error(function (data){
 					deferred.reject('Error: ' + data);
-					$log.debug('Error: ' +  data);
+					$log.error('Error: ' +  data);
 				});
 				return deferred.promise;
 		}

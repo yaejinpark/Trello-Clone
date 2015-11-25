@@ -16,7 +16,7 @@
 				vm.todos = data;
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		}
 
@@ -27,7 +27,7 @@
 				vm.todos.push(data);
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		}
 		//Delete a todo item    
@@ -42,7 +42,7 @@
 				}
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		}
 
@@ -50,10 +50,10 @@
 		vm.updateTodo = function(id, updatedName){
 			TodoService.updateTodo(id, updatedName)
 			.then(function () {
-				$log.debug('Item updated to: ', updatedName);
+				$log.error('Item updated to: ', updatedName);
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		}
 	}

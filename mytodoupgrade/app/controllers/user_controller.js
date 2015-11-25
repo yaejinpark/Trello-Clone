@@ -72,13 +72,13 @@ exports.edit = function (req,res){
 
 //Invite members to board
 exports.inviteUser = function (req,res){
-	var userId = req.params.id;
+	var memberId = req.params.member_id;
 	var boardName = req.body.name;
 	var query = {name: boardName};
 	Board.findOne(query, function (error,board) {
 		if (board) {
 			// console.log(board);
-			board._userid.push(userId);
+			board._userid.push(memberId);
 			board.save()
 			res.json(board);
 		} else if (error) {

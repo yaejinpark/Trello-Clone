@@ -49,7 +49,7 @@ app.post('/api/users/create', UserController.create)
 app.post('/api/users/edit/:id', UserController.edit)
 
 //invte non-creator users to board
-app.post('/api/user/:id/invite/', UserController.inviteUser)
+app.post('/api/user/:member_id/invite/', UserController.inviteUser)
 
 //delete existing user
 app.post('/api/users/delete/:id', UserController.destroy)
@@ -103,7 +103,7 @@ app.post('/api/todos/edit/:todo_id', TodoController.edit)
 app.post('/api/todos/delete/:todo_id', TodoController.destroy)
 
 //when testing, KILL SERVER
-// app.listen(3000);
-// console.log('Listening to port 3000');
+app.listen(3000);
+console.log('Listening to port 3000');
 
 module.exports.app = app;

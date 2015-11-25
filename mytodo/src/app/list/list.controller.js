@@ -20,7 +20,7 @@
 			vm.lists = data;
 		})
 		.catch(function (err) {
-			$log.debug('Error: ' + err);
+			$log.error('Error: ' + err);
 		})
 
 		//Create a new list   
@@ -30,7 +30,7 @@
 				vm.lists.push(data);
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		};
 
@@ -41,7 +41,7 @@
 				vm.lists = data;
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		}
 
@@ -57,7 +57,7 @@
 				}
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		}
 
@@ -65,10 +65,10 @@
 		vm.updateList = function(id, updatedName){
 			ListService.updateList(id, updatedName)
 			.then(function () {
-				$log.debug('List name updated to: ', updatedName);
+				$log.error('List name updated to: ', updatedName);
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		}
 	}

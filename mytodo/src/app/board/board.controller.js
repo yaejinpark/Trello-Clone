@@ -15,13 +15,12 @@
 		vm.formData._userid = userId;
 
 		//List of Boards (with their userId)
-		console.log(userId);
 		BoardService.getBoards(userId)
 		.then(function (data) {
 			vm.boards = data;
 		})
 		.catch(function (err) {
-			$log.debug('Error: ' + err);
+			$log.error('Error: ' + err);
 		})
 
 		//Create a new Board
@@ -42,7 +41,7 @@
 				vm.boards = data;
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		};
 
@@ -58,7 +57,7 @@
 				}
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		};
 
@@ -66,10 +65,10 @@
 		vm.updateBoard = function(id, updatedName){
 			BoardService.updateBoard(id, updatedName)
 			.then(function () {
-				$log.debug('Board name updated to: ', updatedName);
+				$log.error('Board name updated to: ', updatedName);
 			})
 			.catch(function (err) {
-				$log.debug('Error: ' + err);
+				$log.error('Error: ' + err);
 			})
 		};
 	}

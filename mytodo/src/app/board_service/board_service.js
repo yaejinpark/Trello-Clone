@@ -19,7 +19,7 @@
 					deferred.reject(data);
 					$log.error('Error: ' ,  data);
 				});
-				return deferred.promise;
+			return deferred.promise;
 		}
 
 		//Create a new Board
@@ -34,7 +34,7 @@
 					deferred.reject('Error: ' + data);
 					$log.error('Error: ' ,  data);
 				});
-				return deferred.promise;
+			return deferred.promise;
 		};
 
 		//Show a board's content
@@ -45,9 +45,9 @@
 					deferred.resolve(data);
 				})
 				.error(function (data){
-					$log.debug('Error: ' +  data);
+					$log.error('Error: ' +  data);
 				});
-				return deferred.promise;
+			return deferred.promise;
 		};
 
 		//Delete a todo item    
@@ -59,9 +59,9 @@
 				})
 				.error(function (data){
 					deferred.reject('Error: ' + data);
-					$log.debug('Error: ' +  data);
+					$log.error('Error: ' +  data);
 				});
-				return deferred.promise;
+			return deferred.promise;
 		};
 
 		//Update existing list
@@ -73,10 +73,24 @@
 				})
 				.error(function (data){
 					deferred.reject('Error: ' + data);
-					$log.debug('Error: ' +  data);
+					$log.error('Error: ' +  data);
 				});
-				return deferred.promise;
+			return deferred.promise;
 		};
+
+		//Invite a user to board
+		service.inviteUser = function(id){
+			var deferred = $q.defer();
+			$http.post('api/board/' + id + '/invite')
+				.success(function (data) {
+					deferred.resolve(data);
+				})
+				.error(function (data){
+					deferred.reject('Error: ' + data);
+					$log.error('Error: ' +  data);
+				});
+			return deferred.promise;
+		}
 		return service;
 	}
 })();
