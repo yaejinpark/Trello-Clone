@@ -66,15 +66,13 @@ exports.edit = function (req,res){
 	})
 }
 
-//Invite users
+//Invite members to board
 exports.inviteUser = function (req,res){
-	var userId = req.user._id;
 	var boardId = req.params.board_id;
 	var memberName = req.body.username;
 	var query = {username: memberName};
 	User.findOne(query, function (error,invitee){
 		if (invitee) {
-			console.log(invitee);
 			invitee.boards.push(boardId);
 			invitee.save()
 			res.json(invitee);

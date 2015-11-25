@@ -13,7 +13,7 @@ exports.index = function (req,res){
 	var user = User;
 	user.find({})
 	.populate('boards')
-	.exec(function (error, data) {
+	.exec(function (error,data) {
 		if (data) {
 			res.json(data);
 		} else if (error) {
@@ -23,8 +23,8 @@ exports.index = function (req,res){
 }
 
 //Show existing user (one user only)
-exports.show = function(req, res) {
-	User.find({ _id: req.params.id}, function (error, user){
+exports.show = function(req,res) {
+	User.find({ _id: req.params.id}, function (error,user){
 		if (user) {
 			res.json(user);
 		} else if(error) {
@@ -34,7 +34,7 @@ exports.show = function(req, res) {
 }
 
 //Sign Up (Create new account)
-exports.create = function (req, res){
+exports.create = function (req,res){
 	var password = req.body.password,
 		salt = bcrypt.genSaltSync(10),
 		hash = bcrypt.hashSync(password,salt);
@@ -44,7 +44,7 @@ exports.create = function (req, res){
 		email: req.body.email,
 		password: hash
 	});
-	user.save(function (error, data){
+	user.save(function (error,data){
 		if (data){
 			res.json(data);
 		} else if (error) {
@@ -54,7 +54,7 @@ exports.create = function (req, res){
 }
 
 //Update User Information (Only password and e-mail)
-exports.edit = function (req, res){
+exports.edit = function (req,res){
 	var password = req.body.password,
 		salt = bcrypt.genSaltSync(10),
 		hash = bcrypt.hashSync(password,salt);
@@ -63,15 +63,32 @@ exports.edit = function (req, res){
 	User.update(query, {
 		password: hash, 
 		email: req.body.email}, 
-		function (error, data){
-			User.find({}, function (error, user){
+		function (error,data){
+			User.find({}, function (error,user){
 				res.json(user);
 			})
 		})
 }
 
+//Invite members to board
+exports.inviteUser = function (req,res){
+	var userId = req.params.id;
+	var boardName = req.body.name;
+	var query = {name: boardName};
+	Board.findOne(query, function (error,board) {
+		if (board) {
+			// console.log(board);
+			board._userid.push(userId);
+			board.save()
+			res.json(board);
+		} else if (error) {
+			console.error(error.stack);
+		}
+	})
+}
+
 //Destroy Existing User
-exports.destroy = function (req, res){
+exports.destroy = function (req,res){
 	var user = new User({ _id: req.params.id});
 	user.remove(function (error,data){
 		if(data){

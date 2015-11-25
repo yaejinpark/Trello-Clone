@@ -53,7 +53,7 @@ describe ('BoardController', function() {
 									User.create({
 										username: 'imamember',
 										password: 'password',
-										email: 'member@test.com',
+										email: 'member@test.com'
 									}, function (error, newMember) {
 										if(error) {
 											console.log(error);
@@ -84,7 +84,7 @@ describe ('BoardController', function() {
 								if (error) {
 									done.fail(error);
 								} else {
-									User.remove({username:'imamamber'}, function (error, removedMember) {
+									User.remove({_id:member._id}, function (error, removedMember) {
 										if (error) {
 											done.fail(error);
 										} else {
