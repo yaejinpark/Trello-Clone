@@ -69,13 +69,15 @@ exports.edit = function (req,res){
 //Invite users
 exports.inviteUser = function (req,res){
 	var userId = req.user._id;
+	var boardId = req.params.board_id;
 	var memberName = req.body.username;
 	var query = {username: memberName};
-	User.update(query, {}, function (error,invitee){
+	User.findOne(query, function (error,invitee){
 		if (invitee) {
-			Board.save({_userid: invitee._id}, function (err, board) {
-				res.json(board);
-			})
+			console.log(invitee);
+			invitee.boards.push(boardId);
+			invitee.save()
+			res.json(invitee);
 		} else if (error) {
 			console.error(error.stack);
 		}

@@ -53,7 +53,7 @@ describe ('BoardController', function() {
 									User.create({
 										username: 'imamember',
 										password: 'password',
-										email: 'member@test.com'
+										email: 'member@test.com',
 									}, function (error, newMember) {
 										if(error) {
 											console.log(error);
@@ -81,7 +81,17 @@ describe ('BoardController', function() {
 							done.fail(err);
 						} else {
 							User.remove({_id:user._id}, function (error, removedUser) {
-								done();
+								if (error) {
+									done.fail(error);
+								} else {
+									User.remove({username:'imamamber'}, function (error, removedMember) {
+										if (error) {
+											done.fail(error);
+										} else {
+											done();
+										}
+									})
+								}
 							});
 						}
 					})
@@ -101,7 +111,6 @@ describe ('BoardController', function() {
 				if (err) {
 					done.fail(err);
 				} else {
-					// console.log(res.body);
 					expect(res.body.length).toEqual(1);
 					returnedBoard = res.body[0];
 					expect(returnedBoard.name).toBe('testBoard');
@@ -190,8 +199,7 @@ describe ('BoardController', function() {
 					done.fail(err);
 				} else {
 					returnedUser = res.body;
-					console.log(returnedUser);
-					expect(returnedUser.boards).toContain(board._id);
+					expect(returnedUser.boards).toContain(board._id + '');
 					done();
 				}
 			})
