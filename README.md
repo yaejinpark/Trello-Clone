@@ -21,6 +21,8 @@ cd all the way to 'mytodo' folder. This folder contains all of the front-end sid
 ##How To Run Test:
 
 ####Express Test:
+In app.js, comment out line 106 (app.listen(3000)) and then run the server.
+Open another tab in your terminal and make sure the directory in the new terminal window is still 'mytodoupgrade'. Type in 'jasmine' to run all the spec files within the directory.  
 
 ####Angular Test:
 
