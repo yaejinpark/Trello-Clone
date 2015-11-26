@@ -11,12 +11,12 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 Make sure you have all of the directories in todo-angular-mongoose.
 
 ###Express Server:
-	- cd all the way to 'mytodoupgrade' folder. This folder contains all of the back-end side code of the app.
-	- type and enter 'node app.js' and if you are successful, you should get the following message in your terminal: 'Listening to port 3000'
+1) cd all the way to 'mytodoupgrade' folder. This folder contains all of the back-end side code of the app.
+2) Type and enter 'node app.js' and if you are successful, you should get the following message in your terminal: 'Listening to port 3000'
 
 ###Angular Server: 
-	- cd all the way to 'mytodo' folder. This folder contains all of the front-end side code of the app.
-	- type and enter 'gulp serve' and if you are successful, you should see the app running in your default browser with the following page rendered:
+1) cd all the way to 'mytodo' folder. This folder contains all of the front-end side code of the app.
+2) type and enter 'gulp serve' and if you are successful, you should see the app running in your default browser with the following page rendered:
 
 ![Alt text](signin.png "Sign In Page of the App")
 
