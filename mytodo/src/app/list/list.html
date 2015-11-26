@@ -15,7 +15,7 @@
         <p class="input-group col-md-4">
             <div class="col-md-12">
                 <p class="input-group">
-                    <input type="text" ng-model="list.name" class="form-control">
+                    <input type="text" ng-model="list.name" class="form-control" draggable="true">
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-click="listCtrl.updateList(list._id, list.name)" aria-label="Update">Edit</button>
                         <button class="btn btn-danger" ng-click="listCtrl.deleteList(list._id)" aria-label="Remove">X</button>
@@ -26,7 +26,7 @@
         <div class="col-sm-8 input-group" ng-controller="TodoController as todoCtrl">
             <div ng-init="todoCtrl.getTodos(list._id)">
                 <div class="todo-items input-group" ng-repeat="todo in todoCtrl.todos">
-                    <input type="text" ng-model="todo.name">
+                    <input type="text" ng-model="todo.name" draggable="true">
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-click="todoCtrl.updateTodo(todo._id, todo.name)" aria-label="Update">Edit</button>
                         <button class="btn btn-danger" ng-click="todoCtrl.deleteTodo(todo._id)" aria-label="Remove">X</button>

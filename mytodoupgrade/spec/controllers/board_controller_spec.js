@@ -187,6 +187,7 @@ describe ('BoardController', function() {
 		})
 
 		//Test for inviting a member to a board
+		//Have a method to handle both saves
 		it('should invite a new member', function (done) {
 			request(app)
 			.post('/api/board/'+board._id+'/invite/')

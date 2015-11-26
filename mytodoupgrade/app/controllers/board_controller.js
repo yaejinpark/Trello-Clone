@@ -45,8 +45,10 @@ exports.create = function(req,res){
 					console.log(err);
 				} else {
 					var id = mongoose.Types.ObjectId(board._id);
-					user.boards.push(id)
-					user.save()
+					user.boards.push(id);
+					user.save();
+					//what if error occurs here?
+					//change the console logs to message to users
 					res.json(data);	
 				}
 			})
@@ -57,6 +59,7 @@ exports.create = function(req,res){
 }
 
 //Update Existing board
+//include error handling
 exports.edit = function (req,res){
 	var query = { _id: req.params.board_id};
 	Board.update(query, {name: req.body.name}, function (error,data){
@@ -74,7 +77,7 @@ exports.inviteUser = function (req,res){
 	User.findOne(query, function (error,invitee){
 		if (invitee) {
 			invitee.boards.push(boardId);
-			invitee.save()
+			invitee.save();
 			res.json(invitee);
 		} else if (error) {
 			console.error(error.stack);
