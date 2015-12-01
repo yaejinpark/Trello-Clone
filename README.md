@@ -9,7 +9,7 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 ##Setup
 
 * Clone the repo
-* Checkout the master branch
+* Checkout the features branch
 * npm install
 * bower install
 
