@@ -15,6 +15,9 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 
 Make sure you have all of the directories in todo-angular-mongoose.
 
+#####Mongo:
+Mongoose is required for this app. Create two new terminal windows, run 'mongod' on one of them and 'mongo' on the other. This app uses database called 'todos'. After having mongod and mongo running, select the window in which you are running 'mongo' and select todos as your database.
+
 #####Express Server:
 CD all the way to 'mytodoupgrade' folder. This folder contains all of the back-end side code of the app. Type and enter 'node app.js' and if you are successful, you should get the following message in your terminal: 'Listening to port 3000'
 

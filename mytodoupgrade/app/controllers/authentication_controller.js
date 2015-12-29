@@ -23,7 +23,7 @@ exports.auth = function (req, res){
 			    var token = jwt.sign(user, app.app.settings.superSecret, {
 			    	expiresInMinutes: 1440 // expires in 24 hours
 			    });
-
+			    
 			    // return the information including token as JSON
 			    res.json({
 			    	success: true,

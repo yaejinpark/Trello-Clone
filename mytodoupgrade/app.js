@@ -103,7 +103,7 @@ app.post('/api/todos/edit/:todo_id', TodoController.edit)
 app.post('/api/todos/delete/:todo_id', TodoController.destroy)
 
 //when testing, KILL SERVER
-// app.listen(3000);
-// console.log('Listening to port 3000');
+app.listen(3000);
+console.log('Listening to port 3000');
 
 module.exports.app = app;
