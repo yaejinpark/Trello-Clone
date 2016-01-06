@@ -19,18 +19,17 @@ Make sure you have all of the directories in todo-angular-mongoose.
 Mongoose is required for this app. Create two new terminal windows, run 'mongod' on one of them and 'mongo' on the other. This app uses database called 'todos'. After having mongod and mongo running, select the window in which you are running 'mongo' and select todos as your database.
 
 #####Express Server:
-CD all the way to 'mytodoupgrade' folder. This folder contains all of the back-end side code of the app. Type and enter 'node app.js' and if you are successful, you should get the following message in your terminal: 'Listening to port 3000'
+cd all the way to 'mytodoupgrade' folder. This folder contains all of the back-end side code of the app. Type and enter 'node app.js' and if you are successful, you should get the following message in your terminal: 'Listening to port 3000'
 
 #####Angular Server: 
-CD all the way to 'mytodo' folder. This folder contains all of the front-end side code of the app. Type and enter 'gulp serve' and if you are successful, you should see the app running in your default browser with the following page rendered:
+cd all the way to 'mytodo' folder. This folder contains all of the front-end side code of the app. Type and enter 'gulp serve' and if you are successful, you should see the app running in your default browser with the following page rendered:
 
 ![Alt text](signin.png "Sign In Page of the App")
 
 ##How To Run Test:
 
 #####Express Test:
-If you haven't, CD all the way to 'mytodoupgrade' folder. In app.js, comment out line 106 (app.listen(3000)) and then run the server.
-Open another tab in your terminal and make sure the directory in the new terminal window is still 'mytodoupgrade'. Type in 'jasmine' to run all the spec files within the directory.  
+If you haven't, cd all the way to 'mytodoupgrade' folder in your terminal. Type in 'jasmine' to run all the spec files within the directory.  
 
 #####Angular Test:
-If you haven't, CD all the way to 'mytodo' folder. Then run 'gulp test.'
+If you haven't, cd all the way to 'mytodo' folder ins your terminal. Then run 'gulp test.'
