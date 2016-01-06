@@ -1,3 +1,4 @@
+//necessary modules
 var path = require('path'),
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose'),
