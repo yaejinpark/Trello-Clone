@@ -30,7 +30,7 @@
     }));
 
     //Test route for getTodos()
-    fit('should show all todos with the same listId', function () {
+    it('should show all todos with the same listId', function () {
       var listId = '56561942d89a0664090dd6c4';
       var response = service.getTodos(listId)
         .then(function (){
