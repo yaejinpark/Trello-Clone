@@ -12,14 +12,16 @@ var User = require('../models/user'),
 exports.index = function (req,res){
 	var user = User;
 	user.find({})
+	//.populate is necessary for many to many relationship between user and boards
 	.populate('boards')
 	.exec(function (error,data) {
 		if (data) {
 			res.json(data);
 		} else if (error) {
 			console.error(error.stack);
+			return handleError(res, error, 500);
 		}
-	})
+	});
 }
 
 //Show existing user (one user only)
@@ -29,8 +31,9 @@ exports.show = function(req,res) {
 			res.json(user);
 		} else if(error) {
 			console.error(error.stack);
+      return handleError(res, error, 500);
 		}
-	})
+	});
 }
 
 //Sign Up (Create new account)
@@ -49,8 +52,9 @@ exports.create = function (req,res){
 			res.json(data);
 		} else if (error) {
 			console.error(error.stack);
+      return handleError(res, error, 500);
 		}
-	})
+	});
 }
 
 //Update User Information (Only password and e-mail)
@@ -62,12 +66,21 @@ exports.edit = function (req,res){
 	var query = { _id: req.params.id};
 	User.update(query, {
 		password: hash, 
-		email: req.body.email}, 
-		function (error,data){
-			User.find({}, function (error,user){
-				res.json(user);
-			})
-		})
+		email: req.body.email
+  }, function (error,data){
+      if (data){
+  			User.find({}, function (error,user){
+          if (user){
+    				res.json(user);
+          } else if (error) {
+            return handleError(res, error, 500);
+          }
+  			})
+      } else if (error){
+        console.error(error.stack);
+        return handleError(res, error, 500);
+      }
+		});
 }
 
 //Invite members to board
@@ -77,14 +90,14 @@ exports.inviteUser = function (req,res){
 	var query = {name: boardName};
 	Board.findOne(query, function (error,board) {
 		if (board) {
-			// console.log(board);
 			board._userid.push(memberId);
 			board.save()
 			res.json(board);
 		} else if (error) {
 			console.error(error.stack);
+      return handleError(res, error, 500);
 		}
-	})
+	});
 }
 
 //Destroy Existing User
@@ -95,6 +108,7 @@ exports.destroy = function (req,res){
 			res.json(data);
 		} else if (error) {
 			console.error(error.stack);
+      return handleError(res, error, 500);
 		}
-	})
+	});
 }

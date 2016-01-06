@@ -1,115 +1,172 @@
-// var request = require('supertest'),
-//     app = require('../../app').app;
+//necessary modules
+var request = require('supertest'),
+  bcrypt = require('bcrypt-nodejs'),
+  app = require('../../app').app;
 
-// var Todo = require ('../../app/models/todo'),
-//     List = require('../../app/models/list');
+//model
+var Todo = require ('../../app/models/todo'),
+  List = require('../../app/models/list'),
+  User = require('../../app/models/user');
 
-// describe ('TodoController', function() {
+//variables
+var auth = {};
+var user;
 
-//     describe('with data', function() {
-//         var todo;
-//         var list;
+beforeAll(function (done) {
+  var password = 'testingTodos',
+    salt = bcrypt.genSaltSync(10),
+    hash = bcrypt.hashSync(password,salt);
 
-//         beforeEach(function (done) {
-//             List.create({
-//                 name: 'testListforTodo2'
-//             }, function (error, newList) {
-//                 if (error) {
-//                     console.log(error);
-//                     done.fail(error);
-//                 } else {
-//                     list = newList;
-//                     Todo.create({
-//                         _listid: list._id,
-//                         name: 'testTodo' 
-//                     }, function (err, newTodo) {
-//                         if (err) {
-//                             console.log(err);
-//                             done.fail(err);
-//                         } else {
-//                             todo = newTodo;
-//                             done();
-//                         }
-//                     });
-//                 }
-//             })
-//         });
+  User.create({
+    username: 'testingTodos',
+    password: hash,
+    email: 'testingTodos@test.com'
+  }, function (error, dummyUser) {
+    if(error) {
+      done.fail(error);
+    } else {
+      user = dummyUser;
+      loginUser(auth, done);
+    }
+  });
+});
 
-//         afterEach(function (done) {
-//             Todo.remove({_listid:list._id},function (err, removedTodo) {
-//                 if (err) {
-//                   done.fail(err);
-//                 } else {
-//                     List.remove({_id:list._id},function (error, removedList) {
-//                         done();  
-//                     });        
-//                 }
-//             })
-//         });
+afterAll(function (done) {
+  User.remove({_id: user._id}, function (error, removedUser) {
+    if(error) {
+      done.fail(error);
+    } else {
+      done();
+    }
+  });
+});
 
-//         //Test for creating a new todo item
-//         it('should create a new todo', function (done) {
-//             var listId = list._id;
-//             request(app).post('/api/todos/'+listId)
-//             .send({
-//                 // _listid: listId,
-//                 name: 'testTodoCreate'
-//             })
-//             .expect('Content-Type', /json/)
-//             .expect(200)
-//             .end(function (err, res){
-//                 if (err) {
-//                     done.fail(err);
-//                 } else {
-//                     returnedTodo = res.body;
-//                     expect(returnedTodo.name).toBe('testTodoCreate');
-//                     Todo.findOne({ name:'testTodoCreate'})
-//                     .remove(function (error){
-//                         done();
-//                     })
-//                 }
-//             });
-//         });
+describe ('TodoController', function() {
+  describe('with data', function() {
+    var todo;
+    var list;
 
-//         //Test for deleting an existing todo item
-//         it('should delete an existing todo item', function (done) {
-//             request(app).post('/api/todos/delete/'+todo._id)
-//             .end(function (err, res){
-//                 if (err) {
-//                   done.fail(err);
-//                 } else {
-//                     Todo.findOne({ _id: todo._id})
-//                     .remove(function (error){
-//                         Todo.findOne({ _id: todo._id}, function (err,todo){
-//                             if (err) {
-//                                 done.fail(err);
-//                             } else {
-//                                 expect(todo).toBeNull()
-//                                 done();      
-//                             }
-//                         })
-//                     })
-//                 }
-//             });
-//         });
+    beforeEach(function (done) {
+      List.create({
+          name: 'testListforTodo2'
+      }, function (error, newList) {
+        if (error) {
+            done.fail(error);
+        } else {
+          list = newList;
+          Todo.create({
+              _listid: list._id,
+              name: 'testTodo' 
+          }, function (error, newTodo) {
+              if (error) {
+                done.fail(error);
+              } else {
+                todo = newTodo;
+                done();
+              }
+          });
+        }
+      });
+    });
 
-//         //Test for updating a todo item
-//         it('should update an existing todo item', function (done){
-//             request(app).post('/api/todos/edit/'+todo._id)
-//             .send({
-//                 name:'updatedNameTodo'
-//             })
-//             .end(function (err,res){
-//                 if (err) {
-//                   done.fail(err);
-//                 } else {
-//                     returnedTodo = res.body[res.body.length-1];
-//                     expect(returnedTodo.name).toBe('updatedNameTodo');
-//                     Todo.findOne({ name:'updatedNameTodo'})
-//                     done();
-//                 }
-//             })
-//         })
+    afterEach(function (done) {
+      Todo.remove({_listid:list._id},function (error, removedTodo) {
+        if (error) {
+          done.fail(error);
+        } else {
+          List.remove({_id:list._id},function (error, removedList) {
+            done();  
+          });        
+        }
+      });
+    });
 
-//     });
-// });
+    //Test for creating a new todo item
+    it('should create a new todo', function (done) {
+        var listId = list._id;
+        request(app).post('/api/todos/'+listId)
+        .send({
+          name: 'testTodoCreate'
+        })
+        .set('X-ACCESS-TOKEN', auth.token)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (error, res){
+          if (error) {
+            done.fail(error);
+          } else {
+            returnedTodo = res.body;
+            expect(returnedTodo.name).toBe('testTodoCreate');
+            Todo.findOne({ name:'testTodoCreate'})
+              .remove(function (error){
+                if (error) {
+                  done.fail(error);
+                } else {
+                  done();
+                }
+              });
+          }
+        });
+    });
+
+    //Test for updating a todo item
+    it('should update an existing todo item', function (done){
+      request(app)
+      .post('/api/todos/edit/'+todo._id)
+      .set('X-ACCESS-TOKEN', auth.token)
+      .send({
+        name:'updatedNameTodo'
+      })
+      .end(function (error,res){
+          if (error) {
+            done.fail(error);
+          } else {
+            returnedTodo = res.body[res.body.length-1];
+            expect(returnedTodo.name).toBe('updatedNameTodo');
+            Todo.findOne({ name:'updatedNameTodo'})
+            done();
+          }
+      });
+    });
+
+    //Test for deleting an existing todo item
+    it('should delete an existing todo item', function (done) {
+      request(app)
+      .post('/api/todos/delete/'+todo._id)
+      .set('X-ACCESS-TOKEN', auth.token)
+      .end(function (error, res){
+        if (error) {
+          done.fail(error);
+        } else {
+          Todo.findOne({ _id: todo._id})
+          .remove(function (error){
+            Todo.findOne({ _id: todo._id}, function (error,todo){
+              if (error) {
+                done.fail(error);
+              } else {
+                expect(todo).toBeNull()
+                done();      
+              }
+            });
+          });
+        }
+      });
+    });
+  });
+});
+
+function loginUser(auth, done) {
+  request(app)
+  .post('/api/authenticate')
+  .send({
+    username: 'testingTodos',
+    password: 'testingTodos'
+  })
+  .expect(200)
+  .end(onResponse);
+
+  function onResponse(error, res) {
+    auth.token = res.body.token;
+    done();
+  }    
+}

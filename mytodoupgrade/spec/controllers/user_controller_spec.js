@@ -15,7 +15,10 @@ var member;
 beforeAll(function (done) {
   var password = 'password',
     salt = bcrypt.genSaltSync(10),
-    hash = bcrypt.hashSync(password,salt);
+    hash = bcrypt.hashSync(password,salt),
+    password2 = 'hiFren',
+    salt = bcrypt.genSaltSync(10),
+    hash2 = bcrypt.hashSync(password2,salt);
 
   User.create({
     username: 'potentialmember',
@@ -26,10 +29,6 @@ beforeAll(function (done) {
         done.fail(error);
       } else {
         member = newMember;
-
-        var password2 = 'hiFren',
-          salt = bcrypt.genSaltSync(10),
-          hash2 = bcrypt.hashSync(password2,salt);
         User.create({
           username: 'imapotato',
           password: hash2,
@@ -47,13 +46,13 @@ beforeAll(function (done) {
 });
 
 afterAll(function (done) {
-    User.remove({_id: user._id}, function (error, removedUser) {
-        if (error) {
-          done.fail(error);
-        } else {
-          done();
-        }
-    });
+  User.remove({_id: user._id}, function (error, removedUser) {
+    if (error) {
+      done.fail(error);
+    } else {
+      done();
+    }
+  });
 });
 
 describe ('UserController', function() {
@@ -62,8 +61,8 @@ describe ('UserController', function() {
 
     beforeEach(function (done) {
       Board.create({
-          _userid: user._id,
-          name: 'testMemberBoard'
+        _userid: user._id,
+        name: 'testMemberBoard'
       }, function (error, newBoard) {
           if (error) {
             done.fail(error);
@@ -92,46 +91,50 @@ describe ('UserController', function() {
 
       //Test for showing existing user
       it('should return an existing user', function (done) {
-          request(app)
-          .get('/api/user/'+user._id)
-          .set('X-ACCESS-TOKEN', auth.token)
-          .expect('Content-Type', /json/)
-          .expect(200)
-          .end(function (error, res){
-            if (error) {
-              done.fail(error);
-            } else {
-              expect(res.body.length).toEqual(1);
-              returnedUser = res.body[0];
-              expect(returnedUser.username).toBe('imapotato');
-              done();
-            }
-          });
+        request(app)
+        .get('/api/user/'+user._id)
+        .set('X-ACCESS-TOKEN', auth.token)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (error, res){
+          if (error) {
+            done.fail(error);
+          } else {
+            expect(res.body.length).toEqual(1);
+            returnedUser = res.body[0];
+            expect(returnedUser.username).toBe('imapotato');
+            done();
+          }
+        });
       });
 
       //Test for creating a new user
       it('should create a new user', function (done) {
-          request(app).post('/api/users/create')
-          .send({
-            username: 'testCreate14',
-            password: 'createPw',
-            email: 'create14@test.com'
-          })
-          .set('X-ACCESS-TOKEN', auth.token)
-          .expect('Content-Type', /json/)
-          .expect(200)
-          .end(function (error, res){
-            if (error) {
-              done.fail(error);
-            } else {
-              returnedUser = res.body;
-              expect(returnedUser.username).toBe('testCreate14');
-              User.findOne({ username:'testCreate14'})
-              .remove(function (error){
-                  done();
-              });
-            }
-          });
+        request(app).post('/api/users/create')
+        .send({
+          username: 'testCreate14',
+          password: 'createPw',
+          email: 'create14@test.com'
+        })
+        .set('X-ACCESS-TOKEN', auth.token)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (error, res){
+          if (error) {
+            done.fail(error);
+          } else {
+            returnedUser = res.body;
+            expect(returnedUser.username).toBe('testCreate14');
+            User.findOne({ username:'testCreate14'})
+            .remove(function (error){
+              if (error) {
+                done.fail(error);
+              } else {
+              done();
+              }
+            });
+          }
+        });
       });
 
       //Test for updating a user
@@ -148,18 +151,18 @@ describe ('UserController', function() {
           email:'update@test.com'
         })
         .end(function (error,res){
-            if (error) {
-              done.fail(error);
-            } else {
-              User.findOne({ _id: user._id}, function (error, returnedUser) {
-                if (error) {
-                  done.fail(error);
-                } else {
-                  expect(returnedUser.email).toBe('update@test.com');
-                  done();
-                }
-              });
-            }
+          if (error) {
+            done.fail(error);
+          } else {
+            User.findOne({ _id: user._id}, function (error, returnedUser) {
+              if (error) {
+                done.fail(error);
+              } else {
+                expect(returnedUser.email).toBe('update@test.com');
+                done();
+              }
+            });
+          }
         });
       });
 
