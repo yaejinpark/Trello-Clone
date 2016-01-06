@@ -1,39 +1,44 @@
-// (function() {
-//   'use strict';
+(function() {
+  'use strict';
 
-//     describe('TodoService', function() {
-//         var service;
+  describe('TodoService', function() {
+    var service, $httpBackend, handler, todoData, errorMessage;
 
-//         // Configure module that contains the controller being tested
-//         beforeEach(module('mytodo'));
+    // Configure module that contains the controller being tested
+    beforeEach(module('mytodo'));
 
-//         beforeEach(inject(function (_TodoService_) {
-//             service = _TodoService_;
-//         }));
+    beforeEach(inject(function (_$httpBackend_, _TodoService_) {
+      $httpBackend = _$httpBackend_;
+      service = _TodoService_;
+      todoData = [];
 
-//         //Test for getTodos()
-//         it('should show all todos with the same listId', function (done) {
-//             // var listId = 564520305755750406d486f0;
-//             service.getTodos('564520305755750406d486f0')
-//             .then(function (data){
-//                 console.log('I made it');
-//                 console.log(data);
-//                 expect(data.length).toBeGreaterThan(0);
-//                 done();
-//             })
-//             .catch(function (err) {
-//                 console.log('Error: ' + err);
-//                 done.fail(err);
-//             });
+      // Define an object with functions to handle success and error for our API calls
+      // These functions simulate the functions written in controllers when a service is called
+      handler = {
+        success: function(todo) {
+          todoData.push(todo);
+        },
+        error: function(err) {
+          errorMessage = err;
+        }
+      };
 
-//             // console.log(service.getTodos('564520305755750406d486f0').$$state);
-//             // expect(service.getTodos('564520305755750406d486f0')).toBe();
+      // Use the Jasmine spyOn method to setup a callback using our handler mock object
+      spyOn(handler, 'success').and.callThrough();
+      spyOn(handler, 'error').and.callThrough();
+    }));
 
-//         });
-
-//         // it('should set current todo to 1', function() {
-//         //   expect(service.setTodo(1)).toEqual(1);
-//         //   expect(service.getTodo()).toEqual(1);
-//         // });
-//     });
-// })();
+    //Test route for getTodos()
+    it('should show all todos with the same listId', function () {
+      var listId = '56561942d89a0664090dd6c4';
+      var response = service.getTodos(listId)
+        .then(function (){
+          console.log('I made it');
+        })
+        .catch(function (err) {
+          console.log('Error: ' + err);
+        });
+      expect(response).toBeTruthy();
+    });
+  });
+})();
