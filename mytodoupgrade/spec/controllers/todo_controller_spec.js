@@ -13,6 +13,7 @@ var auth = {};
 var user;
 
 beforeAll(function (done) {
+  //creating a dummy user for authentication
   var password = 'testingTodos',
     salt = bcrypt.genSaltSync(10),
     hash = bcrypt.hashSync(password,salt);
@@ -26,6 +27,7 @@ beforeAll(function (done) {
       done.fail(error);
     } else {
       user = dummyUser;
+      //after user is created, call function that allows auth.
       loginUser(auth, done);
     }
   });
