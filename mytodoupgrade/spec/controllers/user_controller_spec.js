@@ -211,6 +211,7 @@ describe ('UserController', function() {
   });
 });
 
+//This function allows existing user to login
 function loginUser(auth, done) {
   request(app)
   .post('/api/authenticate')

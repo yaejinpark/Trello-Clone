@@ -14,14 +14,14 @@ var user;
 
 beforeAll(function (done) {
   //creating a dummy user for authentication
-  var password = 'testingTodos',
+  var password = 'hiFren',
     salt = bcrypt.genSaltSync(10),
     hash = bcrypt.hashSync(password,salt);
 
   User.create({
-    username: 'testingTodos',
+    username: 'imapotato',
     password: hash,
-    email: 'testingTodos@test.com'
+    email: 'imapotato@test.com'
   }, function (error, dummyUser) {
     if(error) {
       done.fail(error);
@@ -86,11 +86,13 @@ describe ('TodoController', function() {
     //Test for creating a new todo item
     it('should create a new todo', function (done) {
         var listId = list._id;
-        request(app).post('/api/todos/'+listId)
+
+        request(app)
+        .post('/api/todos/'+listId)
+        .set('X-ACCESS-TOKEN', auth.token)
         .send({
           name: 'testTodoCreate'
         })
-        .set('X-ACCESS-TOKEN', auth.token)
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (error, res){
@@ -115,17 +117,16 @@ describe ('TodoController', function() {
     it('should update an existing todo item', function (done){
       request(app)
       .post('/api/todos/edit/'+todo._id)
-      .set('X-ACCESS-TOKEN', auth.token)
       .send({
         name:'updatedNameTodo'
       })
+      .set('X-ACCESS-TOKEN', auth.token)
       .end(function (error,res){
           if (error) {
             done.fail(error);
           } else {
             returnedTodo = res.body[res.body.length-1];
             expect(returnedTodo.name).toBe('updatedNameTodo');
-            Todo.findOne({ name:'updatedNameTodo'})
             done();
           }
       });
@@ -157,12 +158,13 @@ describe ('TodoController', function() {
   });
 });
 
+//This function allows existing user to login
 function loginUser(auth, done) {
   request(app)
   .post('/api/authenticate')
   .send({
-    username: 'testingTodos',
-    password: 'testingTodos'
+    username: 'imapotato',
+    password: 'hiFren'
   })
   .expect(200)
   .end(onResponse);
