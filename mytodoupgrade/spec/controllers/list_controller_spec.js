@@ -35,6 +35,16 @@ beforeAll(function (done) {
   });
 });
 
+afterAll(function (done) {
+  User.remove({_id: user._id}, function (error, removedUser) {
+    if (error) {
+      done.fail(error);
+    } else {
+      done();
+    }
+  });
+});
+
 describe ('ListController', function() {
  describe('with data', function() {
 		beforeEach(function (done){
