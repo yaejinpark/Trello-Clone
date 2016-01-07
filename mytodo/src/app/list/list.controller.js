@@ -1,12 +1,15 @@
 (function() {
 	'use strict';
 
+	// var listCounter = 0;
+
 	angular
 	.module('mytodo')
 	.controller('ListController', ListController);
 
 	ListController.$inject = ['$log','$routeParams','ListService']
 	function ListController ($log, $routeParams, ListService) {
+
 		var vm = this;
 		vm.lists = [];
 		vm.formData = {};
