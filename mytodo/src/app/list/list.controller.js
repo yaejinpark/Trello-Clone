@@ -1,8 +1,6 @@
 (function() {
 	'use strict';
 
-	// var listCounter = 0;
-
 	angular
 	.module('mytodo')
 	.controller('ListController', ListController);
