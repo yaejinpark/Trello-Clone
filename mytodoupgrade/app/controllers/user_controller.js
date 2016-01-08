@@ -58,16 +58,15 @@ exports.create = function (req,res){
 	});
 }
 
-//Update User Information (Only password and e-mail)
+//Update User Information (Only password)
 exports.edit = function (req,res){
 	var password = req.body.password,
 		salt = bcrypt.genSaltSync(10),
-		hash = bcrypt.hashSync(password,salt);
+		hash = bcrypt.hashSync(password,salt),
+	  query = { _id: req.user._id};
 
-	var query = { _id: req.params.id};
 	User.update(query, {
 		password: hash, 
-		email: req.body.email
   }, function (error,data){
       if (data){
   			User.find({}, function (error,user){

@@ -144,11 +144,10 @@ describe ('UserController', function() {
         hashUpdate = bcrypt.hashSync(passwordUpdate,salt);
 
       request(app)
-      .post('/api/users/edit/'+user._id)
+      .post('/api/users/edit/')
       .set('X-ACCESS-TOKEN', auth.token)
       .send({
-        password: hashUpdate,
-        email:'update@test.com'
+        password: hashUpdate
       })
       .end(function (error,res){
         if (error) {
@@ -158,7 +157,7 @@ describe ('UserController', function() {
             if (error) {
               done.fail(error);
             } else {
-              expect(returnedUser.email).toBe('update@test.com');
+              expect(returnedUser.password).toBeTruthy();
               done();
             }
           });
