@@ -7,6 +7,7 @@
 
 	ListController.$inject = ['$log','$routeParams','ListService']
 	function ListController ($log, $routeParams, ListService) {
+
 		var vm = this;
 		vm.lists = [];
 		vm.formData = {};

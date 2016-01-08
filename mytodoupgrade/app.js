@@ -46,7 +46,7 @@ app.get('/api/user/:id', UserController.show)
 app.post('/api/users/create', UserController.create)
 
 //update existing user
-app.post('/api/users/edit/:id', UserController.edit)
+app.post('/api/users/edit/', UserController.edit)
 
 //invte non-creator users to board
 app.post('/api/user/:member_id/invite/', UserController.inviteUser)

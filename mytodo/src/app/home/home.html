@@ -13,8 +13,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#/home">Home</a></li>
-        <li class="active"><a href="#/users">Users<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="#/home">Home<span class="sr-only">(current)</span></a></li>
+        <li><a href="#/users">Users</a></li>
         <li><a href="#/boards">Boards</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -25,12 +25,8 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
-  <h2>List of Users</h2>
-  <div ng-init="userCtrl.getUsers()">
-    <div ui-sortable ng-model="userCtrl.users" id="users" ng-repeat="user in userCtrl.users track by $index">
-      <p>
-        {{user.username}}
-      </p>
-    </div>
-  </div>
+  <h2>What's on your list of things to do today?</h2>
+  <p class="introduction">
+    Please use the nav-bar on the top of the page to navigate through the app.
+  </p>
 </div>

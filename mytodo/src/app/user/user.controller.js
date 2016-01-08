@@ -62,10 +62,10 @@
 		};
 
 		//Update an existing user
-		vm.updateUser = function(id, updatedPass, updatedEmail) {
-			UserService.updateUser(id, updatedPass, updatedEmail)
+		vm.updateUser = function(updatedPass) {
+			UserService.updateUser(updatedPass)
 			.then(function () {
-				$log.error('User information update successful!');
+				$log.info('User information update successful!');
 			})
 			.catch(function (err) {
 				$log.error('Error: ', err);

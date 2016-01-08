@@ -1,3 +1,4 @@
+//necessary modules
 var path = require('path'),
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose');
@@ -11,7 +12,7 @@ exports.index = function (req,res){
 	var boardId = req.param('boardId')
 	var list = List;
 	list.find({_boardid: boardId})
-	.sort({ name: 1})
+	// .sort({ name: 1})
 	.populate('todos')
 	.exec(function (error, data) {
 		if (data) {
