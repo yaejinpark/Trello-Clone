@@ -63,7 +63,6 @@
 
 		//Update an existing user
 		vm.updateUser = function(updatedPass) {
-			console.log('in controller: ',updatedPass);
 			UserService.updateUser(updatedPass)
 			.then(function () {
 				$log.info('User information update successful!');
