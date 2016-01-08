@@ -14,22 +14,25 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#/home">Home</a></li>
-        <li class="active"><a href="#/users">Users<span class="sr-only">(current)</span></a></li>
+        <li><a href="#/users">Users</a></li>
         <li><a href="#/boards">Boards</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#/signin">Logout</a></li>
-        <li><a href="#/update-account">My Account</a></li>
+        <li class="active"><a href="#/update-account">My Account<span class="sr-only">(current)</span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
-  <h2>List of Users</h2>
-  <div ng-init="userCtrl.getUsers()">
-    <div ui-sortable ng-model="userCtrl.users" id="users" ng-repeat="user in userCtrl.users track by $index">
-      <p>
-        {{user.username}}
+  <h2>Update My Account</h2>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-8">
+      <p class="input-group">
+        <input type="text" ng-model="userCtrl.password" class="form-control" placeholder="New Password">
+        <span class="input-group-btn">
+          <button class="btn btn-default" ng-click="userCtrl.updateUser(userCtrl.password)" aria-label="Update">Edit</button>
+        </span>
       </p>
     </div>
   </div>

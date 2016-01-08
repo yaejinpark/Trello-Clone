@@ -32,5 +32,76 @@
 }
 
 #user-signin{
-    padding-top: 0.8em;
+  padding-top: 0.8em;
+}
+
+/*custom css*/
+
+.navbar-default{
+  background-color: #193441;
+  border-color:#193441;
+}
+
+.navbar-default .navbar-nav > li > a{
+  color:#F0F0F0;
+}
+
+.navbar-default .navbar-brand{
+  color:#F0F0F0;
+}
+
+h2{
+  color:#F0F0F0;
+}
+
+p{
+  color:#F0F0F0;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+  color:#000000;
+}
+
+.container{
+  background-color:#3E606F;
+}
+
+body{
+  background-color:#3E606F;
+}
+
+.form-control{
+  background-color: #FCFFF5;
+}
+
+.btn-primary{
+  background-color: #91AA9D;
+  border-color:#91AA9D;
+}
+
+.btn-primary:hover{
+  background-color: #D1DBBD;
+  border-color: #D1DFDD;
+}
+
+.btn-default{
+  color:#F0F0F0;
+  background-color: #004C4D;
+  border-color:#004C4D;
+}
+
+.btn-default:hover{
+  color:#F0F0F0;
+  background-color:#007d80;
+  border-color:#007d80;
+}
+
+.btn-danger{
+  background-color: #990000;
+  border-color: #990000;
+}
+
+.input-group .form-control:first-child{
+  background-color:#F0F0F0;
+  border-color:#F0F0F0;
 }

@@ -1,28 +1,56 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#/home">Trello-Clone</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#/home">Home</a></li>
+        <li><a href="#/users">Users</a></li>
+        <li class="active"><a href="#/boards">Boards<span class="sr-only">(current)</span></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#/signin">Logout</a></li>
+        <li><a href="#/update-account">My Account</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 <div class="container">
-    <h2>Your Current Boards</h2>
-    <!-- <h2>{{boardCtrl.currentUserName}}</h2> -->
-    <!-- Boards input -->
-    <form role="form" ng-submit="boardCtrl.createBoard()">
-        <div class="row">
-            <div class="input-group">
-                <input type="text" ng-model="boardCtrl.formData.name" placeholder="Start a New Board" class="form-control">
-                <span class="input-group-btn">
-                    <input type="submit" class="btn btn-primary" value="Add">
-                </span>
-            </div>
-        </div>
-    </form>
-
-    <!-- buttons and forms-->
-    <div ui-sortable ng-model="boardCtrl.boards" id="boards-lists">
-        <p class="input-group" ng-repeat="board in boardCtrl.boards track by $index">
-            <input type="text" ng-model="board.name" class="form-control">
-            <span class="input-group-btn">
-                <a class='btn btn-primary' href="#/lists?boardId={{board._id}}&boardName={{board.name}}">Show Board</a>
-                <button class="btn btn-default" ng-click="boardCtrl.updateBoard(board._id, board.name)" aria-label="Update">Edit</button>
-                <button class="btn btn-danger" ng-click="boardCtrl.deleteBoard(board._id)" aria-label="Remove">X</button>
-            </span>
+  <h2>My Current Boards</h2>
+  <form role="form" ng-submit="boardCtrl.createBoard()">
+    <div class="row">
+      <div class="col-md-6 col-sm-8 col-xs-10">
+        <p class="input-group">
+          <input type="text" ng-model="boardCtrl.formData.name" placeholder="Start a New Board" class="form-control">
+          <span class="input-group-btn">
+            <input type="submit" class="btn btn-primary" value="Add">
+          </span>
         </p>
-    </div> 
-    <a class='btn btn-primary' href="#/users"> Go Back to List of Users</a>
+      </div>
+    </div>
+  </form>
+  <!-- buttons and forms-->
+  <div ui-sortable ng-model="boardCtrl.boards" id="boards-lists">
+    <div class="row">
+      <div class="col-md-6 col-sm-8 col-xs-10">
+        <p class="input-group" ng-repeat="board in boardCtrl.boards track by $index">
+          <input type="text" ng-model="board.name" class="form-control">
+          <span class="input-group-btn">
+            <a class='btn btn-primary' href="#/lists?boardId={{board._id}}&boardName={{board.name}}">Show</a>
+            <button class="btn btn-default" ng-click="boardCtrl.updateBoard(board._id, board.name)" aria-label="Update">Edit</button>
+            <button class="btn btn-danger" ng-click="boardCtrl.deleteBoard(board._id)" aria-label="Remove">Delete</button>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div> 
 </div>
