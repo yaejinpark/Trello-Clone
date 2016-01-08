@@ -42,29 +42,31 @@
   </form>
   <!-- Show All Lists In A Board -->
   <div ng-repeat="list in listCtrl.lists">
-    <div ng-if="$index%3==0" class="row list-of-list"></div>
+    <div ng-if="$index%3==0" class="row"></div>
     <div class="col-md-4">
-      <p class="input-group">
-        <input type="text" ng-model="list.name" class="form-control" draggable="true">
-        <span class="input-group-btn">
-          <button class="btn btn-default" ng-click="listCtrl.updateList(list._id, list.name)" aria-label="Update">Edit</button>
-          <button class="btn btn-danger" ng-click="listCtrl.deleteList(list._id)" aria-label="Remove">Delete</button>
-        </span>
-    <!-- Show All Todos In The Lists -->
-        <div ng-controller="TodoController as todoCtrl" ng-init="todoCtrl.getTodos(list._id)">
-          <div class="todo-items col-md-12" ng-repeat="todo in todoCtrl.todos">
-            <p class="input-group">
-              <input type="text" ng-model="todo.name" class="form-control" draggable="true">
-              <span class="input-group-btn">
-                <button class="btn btn-default" ng-click="todoCtrl.updateTodo(todo._id, todo.name)" aria-label="Update">Edit</button>
-                <button class="btn btn-danger" ng-click="todoCtrl.deleteTodo(todo._id)" aria-label="Remove">Delete</button>
-              </span>
-            </p>
+      <div class="list-box">
+        <p class="input-group">
+          <input type="text" ng-model="list.name" class="form-control" draggable="true">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" ng-click="listCtrl.updateList(list._id, list.name)" aria-label="Update">Edit</button>
+            <button class="btn btn-danger" ng-click="listCtrl.deleteList(list._id)" aria-label="Remove">Delete</button>
+          </span>
+      <!-- Show All Todos In The Lists -->
+          <div ng-controller="TodoController as todoCtrl" ng-init="todoCtrl.getTodos(list._id)">
+            <div class="todo-items col-md-12" ng-repeat="todo in todoCtrl.todos">
+              <p class="input-group">
+                <input type="text" ng-model="todo.name" class="form-control" draggable="true">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" ng-click="todoCtrl.updateTodo(todo._id, todo.name)" aria-label="Update">Edit</button>
+                  <button class="btn btn-danger" ng-click="todoCtrl.deleteTodo(todo._id)" aria-label="Remove">Delete</button>
+                </span>
+              </p>
+            </div>
             <form role="form" ng-submit="todoCtrl.createTodo(list._id)">
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10">
                   <p class="input-group">
-                    <input type="text" ng-model="todoCtrl.formData.name" placeholder="Add Something" class="form-control">
+                    <input type="text" ng-model="todoCtrl.formData.name" placeholder="Add Item" class="form-control">
                     <span class="input-group-btn">
                       <input type="submit" class="btn btn-primary" value="Add">
                     </span>
@@ -73,8 +75,8 @@
               </div>
             </form>
           </div>
-        </div>
-      </p>
+        </p>
+      </div>
     </div>
   </div>
 </div>
