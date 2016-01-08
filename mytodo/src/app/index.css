@@ -80,8 +80,13 @@ body{
 }
 
 .btn-primary:hover{
-  background-color: #D1DBBD;
-  border-color: #D1DFDD;
+  background-color: #527a7a;
+  border-color: #527a7a;
+}
+
+.btn-primary:disabled{
+  background-color: #91AA9D;
+  border-color: #91AA9D;
 }
 
 .btn-default{
@@ -97,11 +102,29 @@ body{
 }
 
 .btn-danger{
-  background-color: #990000;
-  border-color: #990000;
+  background-color: #ff4d4d;
+  border-color: #ff4d4d;
+}
+
+.btn-link{
+  color: #F0F0F0;
+}
+
+.btn-link:hover{
+  color: #F0F0F0;
 }
 
 .input-group .form-control:first-child{
   background-color:#F0F0F0;
   border-color:#F0F0F0;
+}
+
+.list-box{
+  background-color:#193441;
+  border-color:#193441;
+  padding-left:1em;
+  padding-right:1em;
+  padding-top:2em;
+  padding-bottom:0.5em;
+  margin: 0.1em;
 }
