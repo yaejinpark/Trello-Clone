@@ -16,7 +16,7 @@
       redirectTo: '/'
     });
 
-  $routeProvider
+    $routeProvider
     .when('/signup', {
       templateUrl: 'app/signUp/signup.html',
       controller: 'SignupController',
@@ -31,6 +31,15 @@
       templateUrl: 'app/user/user.html',
       controller: 'UserController',
       controllerAs: 'userCtrl'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+
+    $routeProvider
+    .when('/update-account', {
+      templateUrl: 'app/update_account/update_account.html',
+      controller: 'UserController'
     })
     .otherwise({
       redirectTo: '/'
@@ -57,10 +66,8 @@
     });
 
     $routeProvider
-    .when('/todos', {
-      templateUrl: 'app/todo/todo.html',
-      controller: 'TodoController',
-      controllerAs: 'todoCtrl'
+    .when('/home', {
+      templateUrl: 'app/home/home.html',
     })
     .otherwise({
       redirectTo: '/'

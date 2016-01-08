@@ -1,22 +1,38 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#/home">Trello-Clone</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#/signin">Sign In</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 <div class="container">
-    <h2>Create Account</h2>
-    <form name="form" ng-submit="signupCtrl.signup()" role="form">
-        <div class="form-group">
-            <input type="text" placeholder="Username" name="username" id="username" class="form-control" ng-model="signupCtrl.formData.username" required />
-            <!-- <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span> -->
-        </div>
-        <div class="form-group">
-            <input type="text" placeholder="Password" name="password" id="password" class="form-control" ng-model="signupCtrl.formData.password" required />
-            <!-- <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span> -->
-        </div>
-        <div class="form-group">
-            <input type="text" placeholder="E-mail" name="email" id="email" class="form-control" ng-model="signupCtrl.formData.email" required />
-            <!-- <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">E-mail is required</span> -->
-        </div>
-        <div class="form-actions">
-            <!-- <button type="submit" ng-disabled="form.$invalid || signup.dataLoading" class="btn btn-primary">CREATE!!!</button> -->
-            <button type="submit" class="btn btn-primary">CREATE!!!</button>
-            <a href="#/" class="btn btn-link">Already have an account?</a>
-        </div>
-    </form>
+  <h2>Create Account</h2>
+  <form name="form" ng-submit="signupCtrl.signup()" role="form">
+    <div class="form-group">
+      <input type="text" placeholder="Username" name="username" id="username" class="form-control" ng-model="signupCtrl.formData.username" required />
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="Password" name="password" id="password" class="form-control" ng-model="signupCtrl.formData.password" required />
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="E-mail" name="email" id="email" class="form-control" ng-model="signupCtrl.formData.email" required />
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">CREATE!!!</button>
+      <a href="#/signin" class="btn btn-link">Already have an account?</a>
+    </div>
+  </form>
 </div>
