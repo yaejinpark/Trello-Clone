@@ -45,9 +45,9 @@
         <p class="input-group" ng-repeat="board in boardCtrl.boards track by $index">
           <input type="text" ng-model="board.name" class="form-control">
           <span class="input-group-btn">
-            <a class='btn btn-primary' href="#/lists?boardId={{board._id}}&boardName={{board.name}}">Show Board</a>
+            <a class='btn btn-primary' href="#/lists?boardId={{board._id}}&boardName={{board.name}}">Show</a>
             <button class="btn btn-default" ng-click="boardCtrl.updateBoard(board._id, board.name)" aria-label="Update">Edit</button>
-            <button class="btn btn-danger" ng-click="boardCtrl.deleteBoard(board._id)" aria-label="Remove">X</button>
+            <button class="btn btn-danger" ng-click="boardCtrl.deleteBoard(board._id)" aria-label="Remove">Delete</button>
           </span>
         </p>
       </div>
