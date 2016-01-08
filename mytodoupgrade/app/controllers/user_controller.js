@@ -65,10 +65,6 @@ exports.edit = function (req,res){
 		hash = bcrypt.hashSync(password,salt),
 	  query = { _id: req.user._id};
 
-    console.log(password);
-    console.log(salt);
-    console.log(hash);
-    
 	User.update(query, {
 		password: hash, 
   }, function (error,data){
