@@ -39,7 +39,8 @@
     $routeProvider
     .when('/update-account', {
       templateUrl: 'app/update_account/update_account.html',
-      controller: 'UserController'
+      controller: 'UserController',
+      controllerAs: 'userCtrl'
     })
     .otherwise({
       redirectTo: '/'

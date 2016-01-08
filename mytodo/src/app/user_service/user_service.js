@@ -69,9 +69,10 @@
 		};
 
 		//Update an existing user's information
-		service.updateUser = function(id, updatedPass, updatedEmail){
+		service.updateUser = function(updatedPass){
 			var deferred = $q.defer();
-			$http.post('api/users/edit/' + id, {password: updatedPass}, {email: updatedEmail})
+			console.log('updatedPass: ',updatedPass);
+			$http.post('api/users/edit/', {password: updatedPass})
 				.success(function (data){
 					deferred.resolve(data);
 				})
