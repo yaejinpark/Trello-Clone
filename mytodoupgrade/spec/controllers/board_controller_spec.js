@@ -21,26 +21,44 @@ beforeAll(function (done) {
   hash = bcrypt.hashSync(password,salt);
 
   User.create({
-    username: 'imapotato',
-    password: hash,
-    email: 'imapotato@test.com'
-  }, function (error, dummyUser) {
-    if(error) {
-      done.fail(error);
-    } else {
-      user = dummyUser;
-      //after user is created, call function that allows auth.
-      loginUser(auth, done);
-    }
+  	username: 'imamember',
+  	password: 'password',
+  	email: 'member@test.com'
+  }, function (error, newMember) {
+  	if(error) {
+  		done.fail(error);
+  	} else {
+  		member = newMember;
+		  User.create({
+		    username: 'imapotato',
+		    password: hash,
+		    email: 'imapotato@test.com'
+		  }, function (error, dummyUser) {
+		    if(error) {
+		      done.fail(error);
+		    } else {
+		      user = dummyUser;
+		      //after user is created, call function that allows auth.
+		      loginUser(auth, done);
+		    }
+		  });	
+  	}
   });
 });
 
 afterAll(function (done) {
-  User.remove({_id: user._id}, function (error, removedUser) {
+
+  User.remove({_id: member._id}, function (error, removedMemeber) {
     if (error) {
       done.fail(error);
     } else {
-      done();
+    	User.remove({_id: user._id}, function (error, removedUser) {
+    		if (error) {
+    			done.fail(error);
+    		} else {
+    			done();
+    		}
+    	});
     }
   });
 });
@@ -64,19 +82,7 @@ describe ('BoardController', function() {
 							done.fail(error);
 						} else {
 							list = newList;
-							User.create({
-								username: 'imamember',
-								password: 'password',
-								email: 'member@test.com'
-							}, function (error, newMember) {
-								if(error) {
-									console.log(error);
-									done.fail(error);
-								} else {
-									member = newMember;
-									done();
-								}
-							});
+							done();
 						}
 					});
 				}
@@ -88,22 +94,16 @@ describe ('BoardController', function() {
 				if (error) {
 					done.fail(error);
 				} else {
-						User.remove({_id:member._id}, function (error, removedMember) {
-							if (error) {
-								done.fail(error);
-							} else {
-								Board.remove({_userid:user._id}, function (error, removedBoard) {
-									if (error) {
-										done.fail(error);
-									} else {
-										done();
-									}
-								});
-							}
-						});
-					}
-				});
+					Board.remove({_userid:user._id}, function (error, removedBoard) {
+						if (error) {
+							done.fail(error);
+						} else {
+							done();
+						}
+					});
+				}
 			});
+		});
 
 		//Test for showing a board
 		it('should show an existing board', function (done) {

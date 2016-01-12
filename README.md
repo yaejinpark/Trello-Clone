@@ -32,7 +32,11 @@ cd all the way to 'mytodo' folder. This folder contains all of the front-end sid
 ##How To Run Test:
 
 #####Express Test:
-If you haven't, cd all the way to 'mytodoupgrade' folder in your terminal. Type in 'jasmine' to run all the spec files within the directory. WARNING: Test will not run if your node server is running. 
+If you haven't, cd all the way to 'mytodoupgrade' folder in your terminal. Type in 'jasmine' to run all the spec files within the directory. 
+
+######WARNING: 
+*Test will not run if your node server is running. If you are running 'node app.js', Ctrl+C in order to kill the server.
+*If you previously executed the test (especially with code before this update), remove existing data from database. One way is to completely dropping the database and recreating it, or typing in separately: db.users.remove({}), db.boards.remove({}), db.lists.remove({}), db.todos.remove({})
 
 #####Angular Test:
 If you haven't, cd all the way to 'mytodo' folder ins your terminal. Then run 'gulp test.'
