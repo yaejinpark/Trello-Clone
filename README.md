@@ -14,8 +14,8 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 * Clone the repo
 * Checkout the master branch
 * cd to 'mytodoupgrade' folder
-* install npm if you haven't. Follow instrucions [here](https://docs.npmjs.com/getting-started/installing-node){:target="_blank"}
-* install MongoDB, Follow instructions [here](https://www.npmjs.com/package/mongodb){:target="_blank"}
+* install npm if you haven't. Follow instrucions [here](https://docs.npmjs.com/getting-started/installing-node)
+* install MongoDB, Follow instructions [here](https://www.npmjs.com/package/mongodb)
 * npm install
 * cd to 'mytodo' folder
 * npm install
@@ -33,7 +33,7 @@ Navigate all the way to 'mytodoupgrade' folder. This folder contains all of the 
 #####Client Side: 
 Navigate all the way to 'mytodo' folder. This folder contains all of the client side code of the app. Type and enter 'gulp serve' and if you are successful, you should see the app running in your default browser with the following page rendered:
 
-![Alt text](signin.png "Sign In Page of the App")
+![Alt text](signin-new-design.png "Sign In Page of the App")
 
 ##How To Run Tests:
 
