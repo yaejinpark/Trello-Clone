@@ -6,7 +6,7 @@
 
 Trello Clone first started as a simple todo-list app that many new developers are familiar with. This app allows the user to create a board and multiple lists of todo-items within the board. The user may also invite a member (another user) to the board he/she created and let the member have access to the contents of the board. Once user has access to the board, he/she is free to make how many board/lists/todo items as he/she pleases.
 
-##Setup
+##General Setup (Required)
 
 * Clone the repo
 * Checkout the master branch
@@ -16,10 +16,16 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 * npm install
 * bower install (has to be done while in 'mytodo' folder)
 
-Make sure you have all of the directories in todo-angular-mongoose.
+#####MongoDB Setup (Required)
 
-#####Mongo:
-Mongoose is required for this app. Create two new terminal windows, run 'mongod' on one of them and 'mongo' on the other. This app uses database called 'todos'. After having mongod and mongo running, select the window in which you are running 'mongo' and select todos as your database.
+* Follow Instructions on [Here] (https://www.npmjs.com/package/mongodb)
+
+
+Make sure you have all of the directories in todo-angular-mongoose.
+Follow the next instructions in order.
+
+#####Running MongoDB:
+Create two new terminal windows, run 'mongod' on one of them and 'mongo' on the other. This app uses database called 'todos'. After having mongod and mongo running, select the window in which you are running 'mongo' and select todos as your database.
 
 #####Server Side:
 cd all the way to 'mytodoupgrade' folder. This folder contains all of the back-end side code of the app. Type and enter 'node app.js' and if you are successful, you should get the following message in your terminal: 'Listening to port 3000'
