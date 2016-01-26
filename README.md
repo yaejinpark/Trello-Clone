@@ -16,7 +16,7 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 * npm install
 * bower install (has to be done while in 'mytodo' folder)
 
-##MongoDB Setup (Required)
+#####MongoDB Setup (Required)
 
 * Follow Instructions on [Here] (https://www.npmjs.com/package/mongodb)
 
