@@ -12,14 +12,10 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 * Checkout the master branch
 * cd to 'mytodoupgrade' folder
 * npm install
+* install MongoDB, Follow instructions [here](https://www.npmjs.com/package/mongodb)
 * cd to 'mytodo' folder
 * npm install
 * bower install (has to be done while in 'mytodo' folder)
-
-#####MongoDB Setup (Required)
-
-* Follow Instructions on [Here] (https://www.npmjs.com/package/mongodb)
-
 
 Make sure you have all of the directories in todo-angular-mongoose.
 Follow the next instructions in order.
