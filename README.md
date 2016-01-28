@@ -1,4 +1,4 @@
-#Trello Clone Built with MEAN Stack
+#Trello Clone Built with MEAN Stack (Ver 1.0.0)
 
 NOTE: This app is created purely for academic purposes.
 
@@ -10,22 +10,19 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 * Node with Express
 * Angular
 
-##General Setup (Required)
+##General Setup (Required, Please follow in order)
 * Clone the repo
 * Checkout the master branch
-* cd to 'mytodoupgrade' folder
+* Navigate to 'mytodoupgrade' folder
 * install npm if you haven't. Follow instrucions [here](https://docs.npmjs.com/getting-started/installing-node)
 * install MongoDB, Follow instructions [here](https://www.npmjs.com/package/mongodb)
 * npm install
-* cd to 'mytodo' folder
+* Navigate to 'mytodo' folder
 * npm install
 * bower install (has to be done while in 'mytodo' folder)
 
-Make sure you have all of the directories in todo-angular-mongoose.
-Follow the next instructions in order.
-
 #####Running MongoDB:
-Open a new terminal window, run 'mongod' on it. This app uses database called 'todos'. After having mongod and mongo running, select the window in which you are running 'mongo' and select todos as your database.
+Open a new terminal window, run the command 'mongod' on it. This app uses database called 'todos'.
 
 #####Server Side:
 Navigate all the way to 'mytodoupgrade' folder. This folder contains all of the server side code of the app. Type and enter 'node app.js' and if you are successful, you should get the following message in your terminal: 'Listening to port 3000'
@@ -46,3 +43,9 @@ If you haven't, navigate all the way to 'mytodoupgrade' folder in your terminal.
 
 #####Angular Tests:
 If you haven't, navigate all the way to 'mytodo' folder in your terminal. Then run 'gulp test.'
+
+##License:
+The MIT License (MIT)
+See LICENSE.md
+
+
