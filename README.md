@@ -12,7 +12,6 @@ Trello Clone first started as a simple todo-list app that many new developers ar
 
 ##General Setup (Required, Please follow in order)
 * Clone the repo
-* Checkout the master branch
 * Navigate to 'mytodoupgrade' folder
 * install npm if you haven't. Follow instrucions [here](https://docs.npmjs.com/getting-started/installing-node)
 * install MongoDB, Follow instructions [here](https://www.npmjs.com/package/mongodb)
